@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>FitCalc - Free BMR Calculator</title>
+  <meta name="description"
+    content="Calculate your Basal Metabolic Rate and estimated daily calorie needs with the free FitCalc BMR calculator.">
+  <meta name="theme-color" content="#078653">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <!-- HEADER / NAVBAR -->
+  <header class="header" id="home">
+    <div class="container navbar">
+
+      <a href="#home" class="brand">
+        <span class="brand-icon">🌿</span>
+        <span>
+          <strong>FitCalc</strong>
+          <small>Better Health. A Healthier You.</small>
+        </span>
+      </a>
+
+      <button class="menu-toggle"
+        id="menuToggle"
+        aria-label="Open navigation menu"
+        aria-expanded="false"
+        aria-controls="navMenu">
+        ☰
+      </button>
+
+      <nav class="nav-menu" id="navMenu">
+        <a href="#home" class="nav-link active">Home</a>
+        <a href="#about" class="nav-link">About</a>
+
+        <div class="dropdown">
+          <button class="dropdown-toggle"
+            id="dropdownToggle"
+            aria-expanded="false">
+            Calculators <span>⌄</span>
+          </button>
+
+          <div class="dropdown-menu" id="dropdownMenu">
+            <a href="#calculator">BMR Calculator</a>
+            <a href="#calculator">Calorie Calculator</a>
+            <a href="#calculator">BMI Calculator — Coming Soon</a>
+            <a href="#calculator">Water Intake — Coming Soon</a>
+          </div>
+        </div>
+
+        <a href="#faq" class="nav-link">FAQ</a>
+        <a href="#contact" class="nav-link">Contact</a>
+      </nav>
+
+      <a href="#calculator" class="health-btn">♥ Healthy Life</a>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- AD PLACEMENT 1: BELOW NAVBAR -->
+    <div class="ad-container" aria-label="Advertisement placeholder">
+      <span>Advertisement</span>
+      <div class="ad-box ad-top"></div>
+    </div>
+
+    <!-- HERO SECTION -->
+    <section class="hero" id="calculator">
+      <div class="container hero-grid">
+
+        <div class="hero-content">
+          <span class="badge">BMR CALCULATOR</span>
+
+          <h1>Know Your<br>Body's Energy Needs</h1>
+
+          <p class="hero-description">
+            Calculate your Basal Metabolic Rate (BMR) and find out
+            how many calories your body needs at rest. Plan your diet,
+            reach your fitness goals and live a healthier life.
+          </p>
+
+          <div class="hero-benefits">
+            <div class="benefit">
+              <span>💚</span>
+              <p>Better<br>Planning</p>
+            </div>
+
+            <div class="benefit">
+              <span>🎯</span>
+              <p>Achieve<br>Your Goals</p>
+            </div>
+
+            <div class="benefit">
+              <span>🌿</span>
+              <p>Healthy<br>Lifestyle</p>
+            </div>
+
+            <div class="benefit">
+              <span>📈</span>
+              <p>Track<br>Progress</p>
+            </div>
+          </div>
+
+          <a href="#bmrForm" class="btn primary-btn">
+            Calculate Your BMR <span>→</span>
+          </a>
+        </div>
+
+        <!-- BMR CALCULATOR CARD -->
+        <div class="calculator-card" id="bmrForm">
+
+          <div class="calculator-heading">
+            <span class="flame-icon">♨</span>
+            <div>
+              <h2>BMR Calculator</h2>
+              <p>Enter your details to calculate your Basal Metabolic Rate.</p>
+            </div>
+          </div>
+
+          <form id="bmrCalculator" novalidate>
+
+            <fieldset class="gender-field">
+              <legend>Gender</legend>
+
+              <div class="gender-options">
+                <label class="gender-option selected">
+                  <input type="radio" name="gender"
+                    value="male" checked>
+                  <span> Male</span>
+                </label>
+
+                <label class="gender-option">
+                  <input type="radio" name="gender"
+                    value="female">
+                  <span> Female</span>
+                </label>
+              </div>
+            </fieldset>
+
+            <div class="form-group">
+              <label for="age">Age (years)</label>
+              <input type="number" id="age"
+                placeholder="e.g. 25"
+                min="18" max="120"
+                required>
+            </div>
+
+            <div class="form-group">
+              <label for="weight">Weight (kg)</label>
+              <input type="number" id="weight"
+                placeholder="e.g. 65"
+                min="20" max="500"
+                step="any"
+                required>
+            </div>
+
+            <div class="form-group">
+              <label for="height">Height (cm)</label>
+              <input type="number" id="height"
+                placeholder="e.g. 170"
+                min="100" max="250"
+                step="any"
+                required>
+            </div>
+
+            <div class="form-group">
+              <label for="activity">Activity Level</label>
+
+              <select id="activity" required>
+                <option value="1.2">
+                  Sedentary (little or no exercise)
+                </option>
+                <option value="1.375">Lightly active</option>
+                <option value="1.55">Moderately active</option>
+                <option value="1.725">Very active</option>
+                <option value="1.9">Extra active</option>
+              </select>
+            </div>
+
+            <p id="formError" class="form-error"
+              role="alert" hidden></p>
+
+            <button type="submit"
+              class="btn calculate-btn">
+              ▦ Calculate BMR
+            </button>
+
+          </form>
+
+          <!-- CALCULATOR RESULTS -->
+          <div id="results" class="results" hidden
+            aria-live="polite">
+
+            <h3>Your Estimated Results</h3>
+
+            <div class="result-grid">
+              <div class="result-box">
+                <span>Daily BMR</span>
+                <strong id="bmrResult">0</strong>
+                <small>kcal/day</small>
+              </div>
+
+              <div class="result-box">
+                <span>Daily Calories (TDEE)</span>
+                <strong id="tdeeResult">0</strong>
+                <small>kcal/day</small>
+              </div>
+            </div>
+
+            <p id="activityResult" class="activity-result"></p>
+
+            <p class="result-explanation">
+              BMR estimates the energy your body uses at rest.
+              TDEE estimates your total daily energy needs,
+              including physical activity.
+            </p>
+
+            <p class="disclaimer">
+              These results are estimates, not medical advice.
+              Individual energy needs may vary.
+            </p>
+
+            <button type="button" id="resetCalculator"
+              class="btn reset-btn">
+              Calculate Again ↻
+            </button>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- AD PLACEMENT 2: HERO AND FEATURES -->
+    <div class="ad-container" aria-label="Advertisement placeholder">
+      <span>Advertisement</span>
+      <div class="ad-box ad-middle"></div>
+    </div>
+
+    <!-- FEATURES STRIP -->
+    <section class="features">
+      <div class="container features-grid">
+
+        <article class="feature-card">
+          <span class="feature-icon">ϟ⚡</span>
+          <h3>Fast &amp; Accurate</h3>
+          <p>Get instant results with reliable formulas.</p>
+        </article>
+
+        <article class="feature-card">
+          <span class="feature-icon">📱</span>
+          <h3>Mobile Friendly</h3>
+          <p>Calculate anytime, anywhere.</p>
+        </article>
+
+        <article class="feature-card">
+          <span class="feature-icon">🛡️</span>
+          <h3>100% Free</h3>
+          <p>No hidden charges, completely free.</p>
+        </article>
+
+        <article class="feature-card">
+          <span class="feature-icon">🌿</span>
+          <h3>Health Focused</h3>
+          <p>Simple tools for a better you.</p>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- ABOUT SECTION -->
+    <section class="about section-padding" id="about">
+      <div class="container about-grid">
+
+        <div class="about-image">
+          <img
+            src="images-about.jpg"
+            alt="Healthy food and balanced nutrition"
+            loading="lazy">
+        </div>
+
+        <div class="about-content">
+          <span class="badge light-badge">ABOUT FITCALC</span>
+
+          <h2>Your Health, Our Priority</h2>
+
+          <p>
+            FitCalc is a free online fitness calculator platform
+            designed to help you make better health decisions.
+            Our BMR calculator gives you an estimate of your
+            resting energy needs to help you plan your lifestyle.
+          </p>
+
+          <p>
+            We believe that a healthier lifestyle doesn't have
+            to be complicated. With simple tools and easy-to-
+            understand results, FitCalc supports your wellness journey.
+          </p>
+
+          <a href="#about-details" class="btn primary-btn">
+            Learn More <span>→</span>
+          </a>
+        </div>
+
+      </div>
+
+      <div class="container about-details" id="about-details">
+        <h3>Simple Tools for Healthier Decisions</h3>
+        <p>
+          Use your results as a starting point for understanding
+          your energy needs. BMR and calorie estimates are not
+          diagnoses and should be considered alongside your
+          individual circumstances and professional advice.
+        </p>
+      </div>
+    </section>
+
+    <!-- AD PLACEMENT 3: ABOUT AND FAQ -->
+    <div class="ad-container" aria-label="Advertisement placeholder">
+      <span>Advertisement</span>
+      <div class="ad-box ad-middle"></div>
+    </div>
+
+    <!-- FAQ SECTION -->
+    <section class="faq section-padding" id="faq">
+      <div class="container">
+
+        <div class="section-heading">
+          <span class="badge light-badge">FAQ</span>
+          <h2>Frequently Asked Questions</h2>
+          <p>
+            Find answers to common questions about our BMR
+            calculator and how it works.
+          </p>
+        </div>
+
+        <div class="faq-grid">
+
+          <div class="faq-item">
+            <button class="faq-question"
+              aria-expanded="false">
+              What is BMR?
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-answer" hidden>
+              <p>
+                Basal Metabolic Rate (BMR) estimates the calories
+                your body uses at rest to support essential
+                functions such as breathing and circulation.
+              </p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question"
+              aria-expanded="false">
+              Can I use this calculator for weight loss?
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-answer" hidden>
+              <p>
+                The estimate can help you understand your energy
+                needs, but it does not prescribe a weight-loss
+                plan. Individual needs vary, so seek qualified
+                advice when planning dietary changes.
+              </p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question"
+              aria-expanded="false">
+              How is BMR calculated?
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-answer" hidden>
+              <p>
+                This calculator uses the Mifflin-St Jeor equation,
+                which uses age, weight, height and a male or female
+                equation coefficient to estimate resting energy use.
+              </p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question"
+              aria-expanded="false">
+              Is the calculator free to use?
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-answer" hidden>
+              <p>
+                Yes. The calculator runs in your browser and
+                does not require payment or an account.
+              </p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question"
+              aria-expanded="false">
+              What is the difference between BMR and TDEE?
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-answer" hidden>
+              <p>
+                BMR estimates energy use at rest. Total Daily
+                Energy Expenditure (TDEE) estimates total daily
+                energy needs after accounting for an activity factor.
+              </p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question"
+              aria-expanded="false">
+              What units should I use (kg/lb, cm/in)?
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-answer" hidden>
+              <p>
+                Enter weight in kilograms and height in
+                centimeters. Convert pounds to kilograms by
+                dividing by 2.20462. Convert inches to centimeters
+                by multiplying by 2.54.
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- AD PLACEMENT 4: FAQ AND FOOTER -->
+    <div class="ad-container" aria-label="Advertisement placeholder">
+      <span>Advertisement</span>
+      <div class="ad-box ad-bottom"></div>
+    </div>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer" id="contact">
+    <div class="container footer-grid">
+
+      <div class="footer-brand">
+        <a href="#home" class="brand footer-logo">
+          <span class="brand-icon">🌿</span>
+          <span>
+            <strong>FitCalc</strong>
+            <small>Better Health. A Healthier You.</small>
+          </span>
+        </a>
+
+        <p>
+          Simple. Accurate. Free. Your go-to platform for
+          fitness and health calculators.
+        </p>
+
+        <div class="social-links">
+          <a href="#contact" aria-label="Facebook">f</a>
+          <a href="#contact" aria-label="Instagram">◎</a>
+          <a href="#contact" aria-label="YouTube">▶</a>
+          <a href="#contact" aria-label="Pinterest">p</a>
+        </div>
+      </div>
+
+      <div class="footer-column">
+        <h3>Quick Links</h3>
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#calculator">Calculators</a>
+        <a href="#faq">FAQ</a>
+        <a href="#contact">Contact</a>
+      </div>
+
+      <div class="footer-column">
+        <h3>Our Calculators</h3>
+        <a href="#calculator">BMR Calculator</a>
+        <a href="#coming-soon">BMI Calculator</a>
+        <a href="#coming-soon">Calorie Calculator</a>
+        <a href="#coming-soon">Water Intake Calculator</a>
+        <a href="#coming-soon">Ideal Weight Calculator</a>
+
+        <p id="coming-soon" class="coming-soon">
+          Additional calculators are coming soon.
+        </p>
+      </div>
+
+      <div class="footer-column">
+        <h3>Contact Us</h3>
+        <p>✉️ jaimuhary010@gmail.com</p>
+        <p>📍India</p>
+        <p>💬 Always here to support your wellness journey!</p>
+      </div>
+
+    </div>
+
+    <div class="footer-bottom">
+      <div class="container footer-bottom-inner">
+        <p>
+          © <span id="currentYear">2026</span> FitCalc.
+          All rights reserved.
+        </p>
+
+        <div class="legal-links">
+          <a href="privacy.html">Privacy Policy</a>
+          <a href="terms.html">Terms &amp; Conditions</a>
+          <a href="disclaimer">Disclaimer</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="container footer-disclaimer" id="disclaimer">
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+
+</body>
+</html>
