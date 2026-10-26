@@ -260,7 +260,7 @@ select:focus-visible {
             rgba(239, 248, 245, 0.60) 50%, 
             rgba(229, 243, 237, 0.20) 100%
         ), 
-        url("images-hero.jpg");
+        url("hero.jpg");
     background-size: cover;
     background-position: center right;
     background-repeat: no-repeat;
