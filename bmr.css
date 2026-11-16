@@ -1,0 +1,19 @@
+/* BMR page only – builds on style.css (global) and bmi.css (shared calculator/article/info styles) */
+.seg.sm{display:inline-grid;grid-template-columns:auto auto;margin:0 0 10px;padding:3px}
+.seg.sm button{padding:7px 18px;font-size:11px}
+.hint{display:block;font-size:10.5px;line-height:1.6;color:#666;margin-top:10px}
+.field select{width:100%;font:inherit;font-size:13px;padding:13px 14px;border:1.5px solid #e3e7f1;border-radius:10px;background:#fff;color:#111;transition:border-color .2s,box-shadow .2s}
+.field select:focus{outline:0;border-color:#2fb863;box-shadow:0 0 0 4px rgba(47,184,99,.15)}
+.field.bad .pills span{border-color:#f23a12}
+.rcard{background:#fff;border-radius:12px;padding:20px 18px;margin-bottom:14px;box-shadow:0 8px 20px rgba(30,40,90,.07)}
+.rcard.main{border-top:4px solid #2fb863}
+.rcard.tdee{border-top:4px solid #7b6df0;background:#f5f4ff;animation:reveal .5s .12s ease both}
+.rcard .num{font-size:44px;font-weight:700;line-height:1.15;margin:4px 0 10px}
+.rcard .num small{font-size:13px;font-weight:500;color:#555}
+.chip{display:inline-block;font-size:11px;font-weight:500;padding:5px 14px;border-radius:30px;background:#eefaf4;color:#17894a}
+.tdee .chip{background:#e8e5ff;color:#4b3fc4}
+.rcard .explain{background:none;padding:12px 0 0;margin:0}
+.vs{font-size:11px;line-height:1.7;color:#555;margin-bottom:16px}
+.out{text-align:left}
+.out .lbl{font-size:11.5px;color:#555}
+@media(max-width:700px){.rcard .num{font-size:38px}.field select{font-size:16px}}

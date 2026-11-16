@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Free Daily Chlorine Calculator – Pool Chlorine Dosage Estimator | FitCalc</title>
+<meta name="description" content="Use the free FitCalc Daily Chlorine Calculator to estimate how much liquid or granular chlorine your swimming pool needs to reach a target free chlorine level, based on pool volume and product strength.">
+<link rel="canonical" href="https://your-domain.com/chlorine.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="bmi.css">
+<link rel="stylesheet" href="bmr.css">
+<link rel="stylesheet" href="chlorine.css">
+</head>
+<body>
+
+<header class="hero page-hero" id="home">
+  <nav class="nav container">
+    <a href="index.html#home" class="logo"><span>F</span>itCalc</a>
+    <button class="menu-btn" aria-label="Menu" aria-expanded="false"><i></i><i></i><i></i></button>
+    <ul class="links">
+      <li><a href="index.html#home">Home</a></li>
+      <li><a href="index.html#tools">Tools</a></li>
+      <li><a href="index.html#about">About Us</a></li>
+      <li><a href="index.html#faq">FAQ</a></li>
+    </ul>
+    <a href="index.html#tools" class="btn btn-sm cta-nav">Get Started</a>
+  </nav>
+  <div class="container page-title">
+    <h1>Free Daily Chlorine Calculator</h1>
+    <p>Calculate how much chlorine your swimming pool needs to help maintain the appropriate free chlorine level.</p>
+  </div>
+</header>
+
+<main>
+<section class="calc-sec">
+  <div class="container"><p class="intro">💧 The amount of chlorine a pool needs depends on four things: <strong>pool volume</strong>, your <strong>current chlorine level</strong>, your <strong>target chlorine level</strong>, and the <strong>strength of the chlorine product</strong> you are using. Enter them below for a theoretical estimate.</p></div>
+  <div class="container calc">
+    <form class="calc-form" id="clForm" novalidate>
+      <div class="field">
+        <label>Pool volume</label>
+        <div class="seg sm" data-for="mode"><button type="button" class="on" data-v="direct" aria-pressed="true">Enter volume</button><button type="button" data-v="dims" aria-pressed="false">Use dimensions</button></div>
+        <div id="vDirect" class="two"><input type="number" id="vol" inputmode="decimal" step="any" placeholder="Volume" aria-label="Pool volume">
+          <select id="vUnit" aria-label="Volume unit"><option value="L">Liters (L)</option><option value="m3">Cubic meters (m³)</option><option value="gal">US gallons</option></select></div>
+        <div id="vDims" hidden>
+          <div class="two">
+            <select id="shape" aria-label="Pool shape"><option value="rect">Rectangular pool</option><option value="circle">Circular pool</option></select>
+            <select id="dUnit" aria-label="Measurement unit"><option value="m">Meters (m)</option><option value="ft">Feet (ft)</option></select>
+          </div>
+          <div class="two dimgrid">
+            <div id="gL"><span class="ml">Length</span><input type="number" id="len" inputmode="decimal" step="any" aria-label="Length"></div>
+            <div id="gW"><span class="ml">Width</span><input type="number" id="wid" inputmode="decimal" step="any" aria-label="Width"></div>
+            <div id="gR" hidden><span class="ml">Radius</span><input type="number" id="rad" inputmode="decimal" step="any" aria-label="Radius"></div>
+            <div><span class="ml">Average depth</span><input type="number" id="dep" inputmode="decimal" step="any" aria-label="Average depth"></div>
+          </div>
+          <span class="hint">Rectangular: length × width × average depth. Circular: π × radius² × average depth. For irregular pools, enter an estimated average volume instead.</span>
+        </div>
+        <span class="err" id="e-vol"></span>
+      </div>
+
+      <div class="two lvl">
+        <div class="field"><label for="cur">Current free chlorine <small>(ppm)</small></label><input type="number" id="cur" inputmode="decimal" step="any" placeholder="e.g. 0.5"><span class="err" id="e-cur"></span></div>
+        <div class="field"><label for="tgt">Target free chlorine <small>(ppm)</small></label><input type="number" id="tgt" inputmode="decimal" step="any" placeholder="e.g. 3"><span class="err" id="e-tgt"></span></div>
+      </div>
+      <p class="diff" id="diff">Required increase: <strong>–</strong></p>
+
+      <div class="field"><label for="prod">Chlorine product type</label>
+        <select id="prod"><option value="liquid">Liquid chlorine</option><option value="granular">Granular chlorine</option><option value="tablet">Chlorine tablets / other products</option></select></div>
+
+      <div class="field" id="sLiquid">
+        <label>Liquid product strength <small>(from the label)</small></label>
+        <div class="seg sm" data-for="lmode"><button type="button" class="on" data-v="gl" aria-pressed="true">g/L available chlorine</button><button type="button" data-v="pct" aria-pressed="false">% by weight</button></div>
+        <input type="number" id="gl" inputmode="decimal" step="any" placeholder="Available chlorine (g/L)" aria-label="Available chlorine g/L">
+        <div id="lPct" class="two" hidden><input type="number" id="lp" inputmode="decimal" step="any" placeholder="Available chlorine (%)" aria-label="Available chlorine percent"><input type="number" id="dens" inputmode="decimal" step="any" placeholder="Density (kg/L)" aria-label="Product density kg per liter"></div>
+        <span class="hint" id="lHint">Enter the available chlorine concentration printed on your product label.</span>
+        <span class="err" id="e-s"></span>
+      </div>
+      <div class="field" id="sGran" hidden>
+        <label for="gp">Granular product strength <small>(available chlorine, % by weight)</small></label>
+        <input type="number" id="gp" inputmode="decimal" step="any" placeholder="e.g. value shown on the label">
+        <span class="err" id="e-g"></span>
+      </div>
+      <div class="field" id="sTab" hidden>
+        <label for="tp">Available chlorine <small>(% by weight, from the manufacturer)</small></label>
+        <input type="number" id="tp" inputmode="decimal" step="any" placeholder="Leave blank if not provided">
+        <span class="hint">Tablets differ in strength and dissolution rate. Only enter a value given by the manufacturer for your exact product. If unknown, this tool cannot calculate an accurate amount.</span>
+        <span class="err" id="e-t"></span>
+      </div>
+
+      <div class="actions">
+        <button type="submit" class="btn">Calculate</button>
+        <button type="button" class="btn-ghost" id="resetBtn">Reset</button>
+      </div>
+    </form>
+
+    <div class="result" id="result" aria-live="polite">
+      <div class="empty" id="empty"><div class="big">🏊</div><p>Enter your pool and product details, then select <strong>Calculate</strong> to see your estimate here.</p></div>
+      <div class="out" id="out" hidden>
+        <div class="rcard main">
+          <p class="lbl" id="qLbl">Estimated chlorine product quantity</p>
+          <div class="num" id="qtyWrap"><span id="qty">0</span> <small id="qUnit">mL</small></div>
+          <p class="msg" id="msg" hidden></p>
+          <span class="chip" id="qAlt"></span>
+          <p class="explain" id="how"></p>
+        </div>
+        <div class="stats">
+          <div><small>Pool volume</small><b id="sVol"></b></div>
+          <div><small>Current free chlorine</small><b id="sCur"></b></div>
+          <div><small>Target free chlorine</small><b id="sTgt"></b></div>
+          <div><small>Required increase</small><b id="sInc"></b></div>
+          <div><small>Selected product</small><b id="sProd"></b></div>
+          <div><small>Product strength</small><b id="sStr"></b></div>
+        </div>
+        <p class="vs">⚠ Theoretical estimate only. Follow the product label and your pool's specific instructions.</p>
+        <div class="actions"><button type="button" class="btn" id="recalc">Recalculate</button><button type="button" class="btn-ghost" id="resetBtn2">Reset</button></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="safety">
+  <div class="container">
+    <h2>⚠️ Chlorine Safety Information</h2>
+    <ul>
+      <li>Always follow the chlorine product manufacturer's instructions.</li>
+      <li>Never mix different chlorine products or chemicals together.</li>
+      <li>Never mix chlorine with acids, ammonia, or other cleaning products.</li>
+      <li>Wear suitable protective equipment when handling chlorine.</li>
+      <li>Test pool water before and after treatment using a suitable pool testing kit.</li>
+      <li>Follow the product label for circulation and swimming re-entry instructions.</li>
+      <li>Do not assume that a calculated dose automatically makes pool water safe for swimming.</li>
+      <li>Store chlorine products in their original containers according to manufacturer instructions.</li>
+    </ul>
+    <p class="disc"><strong>Disclaimer:</strong> This calculator provides an approximate dosage estimate based on the information entered. Actual chlorine requirements may vary depending on pool conditions, product formulation, stabilizer levels, sunlight, and other factors. Always follow the product label and applicable pool safety guidance.</p>
+  </div>
+</section>
+
+<section class="info-sec">
+  <div class="container">
+    <h2 class="title">Pool Chlorine Basics</h2>
+    <p class="sub">Simple answers to help you understand your pool water.</p>
+    <div class="info-grid">
+      <div class="info c-yellow"><span class="ic i-yellow">🏊</span><h3>What Is Pool Chlorine?</h3><p>Chlorine is a sanitiser added to pool water to kill bacteria and other germs and to break down contaminants.</p></div>
+      <div class="info c-green"><span class="ic i-green">💧</span><h3>Why Is Free Chlorine Important?</h3><p>Free chlorine is the active part that sanitises water. Too little leaves water unprotected, and too much can irritate skin and eyes.</p></div>
+      <div class="info c-purple"><span class="ic i-purple">🧪</span><h3>Free vs Combined Chlorine</h3><p>Free chlorine is available to sanitise. Combined chlorine has already reacted with contaminants and is much less effective.</p></div>
+      <div class="info c-pink"><span class="ic i-pink">🧮</span><h3>How the Calculator Works</h3><p>It finds the extra chlorine needed, converts it to grams of active chlorine, then divides by your product's strength.</p></div>
+      <div class="info c-red"><span class="ic i-red">☀️</span><h3>What Affects Chlorine Levels</h3><p>Sunlight, swimmers, rain, heat, debris and stabiliser levels all change how quickly chlorine is used up.</p></div>
+      <div class="info c-blue"><span class="ic i-blue">🔍</span><h3>How Often to Test</h3><p>Many pool owners test free chlorine regularly, often daily in busy season. Check your product and local guidance.</p></div>
+      <div class="info c-yellow"><span class="ic i-yellow">⚖️</span><h3>Pool Water Balance</h3><p>pH, alkalinity and stabiliser levels all affect how well chlorine works. Test and adjust them together.</p></div>
+    </div>
+  </div>
+</section>
+
+<article class="article">
+  <div class="container narrow">
+    <h2>Swimming Pool Chlorine Calculator: A Complete Guide to Pool Chlorine Levels and Dosage</h2>
+
+    <h3>What Is Swimming Pool Chlorine?</h3>
+    <p>Swimming pool chlorine is a chemical sanitiser that keeps pool water clean and safe-looking. It destroys bacteria and algae and oxidises organic matter such as sweat, oils and leaves. Without it, pool water can quickly become cloudy and unhygienic.</p>
+
+    <h3>What Is Free Chlorine?</h3>
+    <p>Free chlorine is the portion of chlorine in the water that is still active and ready to sanitise. It is measured in parts per million (ppm) with a pool test kit. Once chlorine reacts with contaminants it becomes combined chlorine, which is far less useful. That is why the free chlorine level is the number most pool owners track.</p>
+
+    <h3>How Does a Chlorine Calculator Work?</h3>
+    <p>A Daily Chlorine Calculator estimates how much product is needed to raise your free chlorine from its current level to a target level. It uses four inputs: pool volume, current free chlorine, target free chlorine and the strength of your product. First it finds the increase needed in ppm, then converts that into grams of active chlorine, and finally divides by your product's available chlorine to give a Chlorine Dosage. A Pool Chlorine Calculator gives a theoretical figure, so it cannot replace the label.</p>
+
+    <h3>How to Calculate Pool Water Volume</h3>
+    <p>Accurate Pool Water Volume is the foundation of any dosage estimate. For a rectangular pool, multiply length by width by average depth. For a round pool, multiply pi by the radius squared, then by the average depth. Irregular pools are harder, so use a careful estimate or the volume given by the pool builder.</p>
+
+    <h3>Factors That Affect Chlorine Levels</h3>
+    <p>Chlorine does not last forever. Strong sunlight breaks it down, heavy bather loads use it up, and rainfall, leaves, sunscreen and other organic contaminants consume it. Warm water, poor circulation and the amount of stabiliser in the water can also change how much Free Chlorine Level you actually keep.</p>
+
+    <h3>Why Should You Test Pool Water Regularly?</h3>
+    <p>Calculators work from the numbers you give them, so reliable test results matter. Regular testing shows whether chlorine is too low to protect swimmers or too high for comfort. Testing again after treatment confirms the result and helps you spot problems early.</p>
+
+    <h3>Important Chlorine Safety Tips</h3>
+    <p>Always read and follow the product label. Wear gloves and eye protection, add chemicals as directed, and never mix chlorine products with each other or with acids, ammonia or cleaners, because dangerous gases can form. Keep products in their original containers, away from children and heat.</p>
+  </div>
+</article>
+
+<section class="faq" id="faq">
+  <div class="container narrow">
+    <h2 class="title">Frequently Asked Questions</h2>
+    <p class="sub">Quick answers about pool chlorine and this calculator.</p>
+    <div class="acc">
+      <div class="item"><button class="q" aria-expanded="false">What is a Daily Chlorine Calculator?<b></b></button><div class="a"><p>It is a tool that estimates how much chlorine product is needed to raise your pool's free chlorine from its current level to a target, based on pool volume and product strength.</p></div></div>
+      <div class="item"><button class="q" aria-expanded="false">How much chlorine does my swimming pool need?<b></b></button><div class="a"><p>It depends on your pool volume, current and target levels, and your product's strength. Enter these in the calculator for a theoretical estimate, and always follow your product label.</p></div></div>
+      <div class="item"><button class="q" aria-expanded="false">What is free chlorine in pool water?<b></b></button><div class="a"><p>Free chlorine is the active chlorine in the water that is available to sanitise. It is measured in ppm using a test kit.</p></div></div>
+      <div class="item"><button class="q" aria-expanded="false">What is the difference between liquid and granular chlorine?<b></b></button><div class="a"><p>Liquid chlorine is a solution measured by volume, with strength shown as available chlorine in g/L or percent. Granular chlorine is a solid measured by weight, with strength shown as available chlorine percent. Strengths vary between products, so use the label values.</p></div></div>
+      <div class="item"><button class="q" aria-expanded="false">How do I calculate my swimming pool volume?<b></b></button><div class="a"><p>For a rectangular pool, multiply length × width × average depth. For a circular pool, multiply π × radius² × average depth. Our calculator can do this for you using the “Use dimensions” option.</p></div></div>
+      <div class="item"><button class="q" aria-expanded="false">Does pool size affect chlorine dosage?<b></b></button><div class="a"><p>Yes. A larger pool holds more water, so more chlorine is needed to raise the ppm by the same amount.</p></div></div>
+      <div class="item"><button class="q" aria-expanded="false">How often should I test swimming pool chlorine?<b></b></button><div class="a"><p>Testing frequency depends on pool use and conditions. Many owners test often during swimming season and after heavy use or rain. Follow your product and local guidance.</p></div></div>
+      <div class="item"><button class="q" aria-expanded="false">Can I use this calculator for chlorine tablets?<b></b></button><div class="a"><p>Only if the manufacturer gives the available chlorine percentage for your exact tablet. Tablets differ in strength and dissolve slowly, so without that information this tool cannot give an accurate amount.</p></div></div>
+      <div class="item"><button class="q" aria-expanded="false">Is this chlorine calculator suitable for every pool?<b></b></button><div class="a"><p>No. It gives a theoretical estimate. Sunlight, stabiliser, swimmers, water chemistry and product formulation all affect real results, so test your water and follow the label.</p></div></div>
+      <div class="item"><button class="q" aria-expanded="false">Is this Daily Chlorine Calculator free to use?<b></b></button><div class="a"><p>Yes, it is completely free and needs no sign-up.</p></div></div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="footer">
+  <div class="container fgrid">
+    <div class="fbrand">
+      <a href="index.html#home" class="logo"><span>F</span>itCalc</a>
+      <p>Simple and free fitness calculators to help you understand your health and wellness.</p>
+    </div>
+    <div><h4>Quick Links</h4><ul>
+      <li><a href="index.html#home">Home</a></li><li><a href="index.html#tools">Tools</a></li><li><a href="index.html#about">About Us</a></li><li><a href="index.html#faq">FAQ</a></li></ul></div>
+    <div><h4>Our Calculators</h4><ul>
+      <li><a href="bmi.html">BMI Calculator</a></li>
+      <li><a href="chlorine.html">Daily Chlorine Calculator</a></li>
+      <li><a href="bmr.html">BMR Calculator</a></li>
+      <li><a href="tools/water-intake-estimator.html">Water Intake Estimator</a></li>
+      <li><a href="tools/healthy-weight-range-estimator.html">Healthy Weight Range Estimator</a></li>
+      <li><a href="tools/body-fat-calculator.html">Body Fat Calculator</a></li></ul></div>
+    <div><h4>Legal Links</h4><ul>
+      <li><a href="privacy-policy.html">Privacy Policy</a></li><li><a href="terms.html">Terms &amp; Conditions</a></li><li><a href="disclaimer.html">Disclaimer</a></li><li><a href="contact.html">Contact Us</a></li></ul></div>
+  </div>
+  <p class="copy">© 2026 FitCalc. All Rights Reserved.</p>
+</footer>
+
+<script src="script.js"></script>
+<script src="chlorine.js"></script>
+</body>
+</html>

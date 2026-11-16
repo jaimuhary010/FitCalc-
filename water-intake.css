@@ -1,0 +1,38 @@
+/* Water intake page only – builds on style.css, bmi.css and bmr.css */
+.intro{font-size:12px;line-height:1.8;color:#333;background:#eef5ff;border-radius:12px;padding:16px 20px;margin-bottom:24px;box-shadow:0 8px 20px rgba(30,40,90,.06)}
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px}
+.stats.three{grid-template-columns:repeat(3,1fr);margin:16px 0 10px}
+.stats div{background:#fff;border-radius:10px;padding:12px 14px;box-shadow:0 6px 16px rgba(30,40,90,.06);min-width:0}
+.stats small{display:block;font-size:10px;color:#666;margin-bottom:3px}
+.stats b{font-size:12.5px;font-weight:600;word-break:break-word}
+.rcard .num{color:#0a5fe0}
+.rcard.main{border-top-color:#1aa0ff}
+.chip{background:#eef5ff;color:#0a5fe0}
+.msg{font-size:13px;line-height:1.7}.msg.warn{color:#b52a0a;font-weight:500}
+.notice{border-top:4px solid #f2a900;background:#fffaf0}
+
+.tracker{margin-top:28px;background:#fff;border-radius:14px;box-shadow:0 14px 40px rgba(30,40,90,.12);padding:28px;border-top:4px solid #1aa0ff}
+.tr-head h2{font-size:19px;font-weight:600;margin-bottom:6px}
+.tr-head p{font-size:11.5px;color:#555;line-height:1.7;margin-bottom:20px}
+.tr-body{display:grid;grid-template-columns:130px 1fr;gap:28px;align-items:center}
+.glass{position:relative;width:110px;height:170px;margin:auto;border:3px solid #bcd8f7;border-top-width:3px;border-radius:6px 6px 26px 26px;overflow:hidden;background:#f3f8ff}
+.glass i{position:absolute;left:0;right:0;bottom:0;height:0;background:linear-gradient(#5fc3ff,#1a7de6);transition:height .9s cubic-bezier(.2,.8,.2,1)}
+.glass span{position:absolute;inset:0;display:grid;place-items:center;font-weight:700;font-size:18px;color:#0b3d82;text-shadow:0 0 6px #fff}
+.bar{height:14px;background:#e6eefb;border-radius:14px;overflow:hidden}
+.bar i{display:block;height:100%;width:0;border-radius:14px;background:linear-gradient(90deg,#5fc3ff,#1a7de6);transition:width .9s cubic-bezier(.2,.8,.2,1)}
+.tmsg{font-size:11.5px;color:#17894a;min-height:18px;margin-bottom:10px}
+.add{display:grid;grid-template-columns:1fr 110px auto;gap:10px;align-items:stretch}
+.add input{width:100%;font:inherit;font-size:14px;padding:12px 14px;border:1.5px solid #e3e7f1;border-radius:10px;transition:border-color .2s,box-shadow .2s;min-width:0}
+.add input:focus{outline:0;border-color:#2fb863;box-shadow:0 0 0 4px rgba(47,184,99,.15)}
+.add select{font:inherit;font-size:13px;padding:12px 10px;border:1.5px solid #e3e7f1;border-radius:10px;background:#fff}
+.add .btn{border:0;border-radius:8px;padding:12px 22px}
+.quick{display:flex;flex-wrap:wrap;gap:10px;margin:14px 0 10px}
+.quick .btn-ghost{padding:9px 18px}
+.disc-sec{padding:0 0 60px}
+.disc{font-size:11.5px;line-height:1.8;color:#444;background:#fffaf0;border-left:4px solid #1aa0ff;border-radius:8px;padding:16px 18px}
+@media(max-width:700px){
+  .tracker{padding:20px 18px}.tr-body{grid-template-columns:1fr;gap:20px}
+  .add{grid-template-columns:1fr 1fr}.add .btn{grid-column:1/-1}
+  .add input,.add select{font-size:16px}
+  .stats.three{grid-template-columns:1fr}
+}

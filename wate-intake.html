@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Free Daily Water Intake Calculator – Water Intake Estimator | FitCalc</title>
+<meta name="description" content="Use the free FitCalc Water Intake Estimator to get a general estimate of your daily fluid needs based on body weight, activity, exercise and climate, plus a simple hydration tracker.">
+<link rel="canonical" href="https://your-domain.com/water-intake.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="bmi.css">
+<link rel="stylesheet" href="bmr.css">
+<link rel="stylesheet" href="water-intake.css">
+</head>
+<body>
+
+<header class="hero page-hero" id="home">
+  <nav class="nav container">
+    <a href="index.html#home" class="logo"><span>F</span>itCalc</a>
+    <button class="menu-btn" aria-label="Menu" aria-expanded="false"><i></i><i></i><i></i></button>
+    <ul class="links">
+      <li><a href="index.html#home">Home</a></li>
+      <li><a href="index.html#tools">Tools</a></li>
+      <li><a href="index.html#about">About Us</a></li>
+      <li><a href="index.html#faq">FAQ</a></li>
+    </ul>
+    <a href="index.html#tools" class="btn btn-sm cta-nav">Get Started</a>
+  </nav>
+  <div class="container page-title">
+    <h1>Free Daily Water Intake Calculator</h1>
+    <p>Discover your estimated daily water needs and build healthier hydration habits with our easy-to-use Water Intake Estimator.</p>
+  </div>
+</header>
+
+<main>
+<section class="calc-sec">
+  <div class="container"><p class="intro">💧 How much fluid you need depends on <strong>body size</strong>, <strong>activity</strong>, <strong>climate</strong>, <strong>diet</strong> and <strong>individual health conditions</strong>. This tool gives a general educational estimate for healthy adults, so use it as a starting point rather than a fixed rule.</p></div>
+  <div class="container calc">
+    <form class="calc-form" id="wForm" novalidate>
+      <div class="field"><label for="age">Age <small>(years)</small></label>
+        <input type="number" id="age" inputmode="numeric" placeholder="e.g. 30"><span class="err" id="e-age"></span></div>
+
+      <fieldset class="field">
+        <legend>Gender <small>(optional)</small></legend>
+        <div class="pills">
+          <label><input type="radio" name="gender" value="male"><span>Male</span></label>
+          <label><input type="radio" name="gender" value="female"><span>Female</span></label>
+          <label><input type="radio" name="gender" value="na"><span>Prefer not to say</span></label>
+        </div>
+        <span class="hint">Gender does not change the estimate. Needs vary from person to person.</span>
+      </fieldset>
+
+      <div class="field">
+        <label for="wt">Body weight</label>
+        <div class="seg sm" data-for="w"><button type="button" class="on" data-u="kg" aria-pressed="true">kg</button><button type="button" data-u="lb" aria-pressed="false">lbs</button></div>
+        <input type="number" id="wt" inputmode="decimal" step="any" placeholder="e.g. 68">
+        <span class="err" id="e-wt"></span>
+      </div>
+
+      <div class="field"><label for="act">Activity level</label>
+        <select id="act">
+          <option value="0">Sedentary – little or no exercise</option>
+          <option value="1">Lightly Active – light physical activity</option>
+          <option value="2">Moderately Active – regular moderate exercise</option>
+          <option value="3">Very Active – intense or physically demanding activity</option>
+        </select></div>
+
+      <div class="field"><label for="ex">Daily exercise duration</label>
+        <select id="ex">
+          <option value="0">No exercise</option>
+          <option value="1">15–30 minutes</option>
+          <option value="2">30–60 minutes</option>
+          <option value="3">60–90 minutes</option>
+          <option value="4">More than 90 minutes</option>
+        </select>
+        <span class="hint">To avoid double-counting, only the larger of the activity-level or exercise-duration allowance is added, never both.</span></div>
+
+      <div class="field"><label for="cl">Climate</label>
+        <select id="cl">
+          <option value="0">Cool climate</option>
+          <option value="0" selected>Moderate climate</option>
+          <option value="500">Hot climate</option>
+        </select>
+        <span class="hint">Hot environments and heavy sweating can increase fluid needs.</span></div>
+
+      <div class="actions">
+        <button type="submit" class="btn">Calculate</button>
+        <button type="button" class="btn-ghost" id="resetBtn">Reset</button>
+      </div>
+    </form>
+
+    <div class="result" id="result" aria-live="polite">
+      <div class="empty" id="empty"><div class="big">💧</div><p>Enter your details and select <strong>Calculate</strong> to see your estimate here.</p></div>
+      <div class="out" id="out" hidden>
+        <div class="rcard notice" id="noticeCard" hidden><p class="msg warn" id="noticeMsg"></p></div>
+        <div id="resBody">
+          <div class="rcard main">
+            <p class="lbl">Your Estimated Daily Fluid Intake</p>
+            <div class="num"><span id="rL">0</span> <small>L / day</small></div>
+            <span class="chip" id="rChip"></span>
+            <p class="explain" id="how"></p>
+          </div>
+          <div class="stats">
+            <div><small>Amount in liters</small><b id="sL"></b></div>
+            <div><small>Amount in milliliters</small><b id="sMl"></b></div>
+            <div><small>US fluid ounces</small><b id="sOz"></b></div>
+            <div><small>US cups</small><b id="sCup"></b></div>
+            <div><small>Baseline estimate</small><b id="sBase"></b></div>
+            <div><small>Activity / climate adjustment</small><b id="sAdj"></b></div>
+          </div>
+          <p class="vs">This is an approximate estimate. Fluid also comes from other drinks and food.</p>
+        </div>
+        <div class="actions"><button type="button" class="btn" id="recalc">Recalculate</button><button type="button" class="btn-ghost" id="resetBtn2">Reset</button></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container tracker" id="tracker" hidden>
+    <div class="tr-head"><h2>💦 Daily Hydration Tracker</h2><p>An optional log to compare what you drink with your estimated target. It does not measure your actual hydration status.</p></div>
+    <div class="tr-body">
+      <div class="glass" aria-hidden="true"><i id="fill"></i><span id="glassPct">0%</span></div>
+      <div class="tr-main">
+        <div class="bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="bar"><i id="barFill"></i></div>
+        <div class="stats three">
+          <div><small>Daily target</small><b id="tTarget"></b></div>
+          <div><small>Consumed</small><b id="tDone"></b></div>
+          <div><small>Remaining</small><b id="tLeft"></b></div>
+        </div>
+        <p class="tmsg" id="tMsg"></p>
+        <div class="add">
+          <input type="number" id="addAmt" inputmode="decimal" step="any" placeholder="Amount" aria-label="Water consumed">
+          <select id="addUnit" aria-label="Unit"><option value="ml">mL</option><option value="l">Liters</option></select>
+          <button type="button" class="btn" id="addBtn">Add water</button>
+        </div>
+        <span class="err" id="e-add"></span>
+        <div class="quick"><button type="button" class="btn-ghost" data-q="250">+250 mL</button><button type="button" class="btn-ghost" data-q="500">+500 mL</button><button type="button" class="btn-ghost" id="clearLog">Clear today's log</button></div>
+        <p class="hint">Your target and today's total are saved only in this browser (localStorage) and reset each day.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="disc-sec">
+  <div class="container"><p class="disc"><strong>Disclaimer:</strong> This Water Intake Estimator provides a general educational estimate and is not a medical assessment. Individual fluid needs vary depending on health, medication, activity, climate, diet, and other factors. People with kidney, heart, or other medical conditions that affect fluid balance should follow advice from their healthcare professional. Do not force excessive water consumption.</p></div>
+</section>
+
+<section class="info-sec">
+  <div class="container">
+    <h2 class="title">Hydration Basics</h2>
+    <p class="sub">Simple facts to help you understand your daily fluid needs.</p>
+    <div class="info-grid">
+      <div class="info c-blue"><span class="ic i-blue">💧</span><h3>Why Is Water Important?</h3><p>Water supports temperature control, digestion, circulation and the removal of waste, and helps joints and tissues work smoothly.</p></div>
+      <div class="info c-green"><span class="ic i-green">🥛</span><h3>How Much Should You Drink?</h3><p>There is no single number for everyone. Total fluid needs come from drinks and food and vary from person to person.</p></div>
+      <div class="info c-purple"><span class="ic i-purple">🧬</span><h3>What Affects Your Needs</h3><p>Body size, activity, climate, diet, age, medicines and health conditions can all raise or lower fluid needs.</p></div>
+      <div class="info c-red"><span class="ic i-red">🥵</span><h3>Signs of Dehydration</h3><p>Thirst, a dry mouth, darker urine, tiredness or headache can be signs, but they can also have other causes.</p></div>
+      <div class="info c-yellow"><span class="ic i-yellow">✨</span><h3>Benefits of Good Hydration</h3><p>Staying well hydrated supports energy, concentration, digestion and physical performance.</p></div>
+      <div class="info c-pink"><span class="ic i-pink">🌱</span><h3>Healthy Hydration Habits</h3><p>Keep a bottle nearby, sip through the day, drink with meals and choose water often.</p></div>
+      <div class="info c-blue"><span class="ic i-blue">🏃</span><h3>Exercise and Hot Weather</h3><p>You lose more fluid through sweat when you exercise or it is hot. Drink to thirst and replace losses sensibly.</p></div>
+    </div>
+  </div>
+</section>
+
+<article class="article">
+  <div class="container narrow">
+    <h2>Daily Water Intake: A Complete Guide to Understanding Your Hydration Needs</h2>
+
+    <h3>What Is Daily Water Intake?</h3>
+    <p>Daily Water Intake is the total amount of fluid you take in over a day, mostly from drinking water and other beverages, plus a share from food. Your body is mostly water, and it needs a steady supply to regulate temperature, move nutrients, support digestion and remove waste.</p>
+
+    <h3>How Much Water Should You Drink Every Day?</h3>
+    <p>Many people ask, how much water should I drink? The honest answer is that it depends. Fluid needs differ between individuals and change with body size, activity, weather and health. A fixed figure for everyone would be misleading, so a general estimate is best treated as a starting point.</p>
+
+    <h3>How Does a Water Intake Estimator Work?</h3>
+    <p>A Water Intake Estimator starts with your body weight. This tool uses a simple educational baseline of 33 mL of fluid per kilogram, which is not an established medical formula. It then adds a modest, clearly shown allowance for activity or exercise, and for hot climates. Exercise and activity are not stacked on top of each other, to avoid inflating the result. A Water Intake Calculator like this gives an approximate figure, not a prescription.</p>
+
+    <h3>Factors That Affect Hydration Needs</h3>
+    <p>Age, physical activity, sweating, climate and diet all matter. Hot or humid weather increases sweat loss, while foods such as fruit and vegetables add to your fluid intake. Pregnancy, breastfeeding, some medications and health conditions can also change what is appropriate for you.</p>
+
+    <h3>Benefits of Staying Hydrated</h3>
+    <p>Good Daily Hydration helps the body regulate temperature, supports digestion and helps joints and tissues function. It also supports physical performance and concentration. Even mild fluid shortfalls can leave some people feeling tired or less focused.</p>
+
+    <h3>Signs of Dehydration</h3>
+    <p>Common signs include thirst, a dry mouth, darker urine, headache and feeling unusually tired. These symptoms can have other causes, so they are not a diagnosis. If you feel very unwell, seek medical advice.</p>
+
+    <h3>Tips for Maintaining Healthy Hydration Habits</h3>
+    <p>Healthy Hydration Habits are usually simple. Keep a bottle within reach, sip regularly, and have a drink with each meal. Tea, coffee, milk and water-rich foods all contribute. Drink a little more when you sweat, and listen to your thirst. Never force yourself to drink large amounts, because too much water can also be harmful.</p>
+  </div>
+</article>
+
+<section class="faq" id="faq">
+  <div class="container narrow">
+    <h2 class="title">Frequently Asked Questions</h2>
+    <p class="sub">Quick answers about hydration and this estimator.</p>
+    <div class="acc">
+      <div class="item"><button class="q" aria-expanded="false">How much water should I drink every day?<b></b></button><div class="a"><p>It varies. Needs depend on body size, activity, climate, diet and health. Total fluid comes from drinking water, other beverages and food, so there is no single amount that suits everyone.</p></div></div>
+      <div class="item"><button class="q" aria-expanded="false">How does a Water Intake Estimator work?<b></b></button><div class="a"><p>It takes your body weight, multiplies it by a general baseline (33 mL per kg here), and adds a small, clearly shown allowance for activity, exercise and hot climates. The result is an approximate estimate.</p></div></div>
+      <div class="item"><button class="q" aria-expanded="false">Does body weight affect daily water needs?<b></b></button><div class="a"><p>Generally yes. Larger bodies tend to need more fluid, which is why weight is the starting point for the estimate. It is not the only factor.</p></div></div>
+      <div class="item"><button class="q" aria-expanded="false">Does exercise increase water requirements?<b></b></button><div class="a"><p>Usually. You lose fluid through sweat when you exercise, so you may need to drink more. How much depends on intensity, duration, climate and your own sweat rate.</p></div></div>
+      <div class="item"><button class="q" aria-expanded="false">Should I drink more water in hot weather?<b></b></button><div class="a"><p>Often, yes, because heat increases sweat loss. Drink according to thirst and replace losses sensibly rather than forcing large amounts.</p></div></div>
+      <div class="item"><button class="q" aria-expanded="false">Does tea and coffee count towards daily fluid intake?<b></b></button><div class="a"><p>Yes. Tea, coffee, milk and other drinks contribute to fluid intake, as do foods with high water content such as fruit and vegetables.</p></div></div>
+      <div class="item"><button class="q" aria-expanded="false">Can I drink too much water?<b></b></button><div class="a"><p>Yes. Drinking very large amounts in a short time can dilute sodium levels in the blood, which can be dangerous. Never force yourself to drink, and follow medical advice if you have a condition affecting fluid balance.</p></div></div>
+      <div class="item"><button class="q" aria-expanded="false">Is thirst a reliable sign of dehydration?<b></b></button><div class="a"><p>For most healthy people thirst is a useful cue to drink. It may be less reliable in older adults, during intense exercise or in some illnesses. Dark urine, dry mouth and tiredness can also be clues, but they have other causes too.</p></div></div>
+      <div class="item"><button class="q" aria-expanded="false">Do children need the same amount of water as adults?<b></b></button><div class="a"><p>No. Children and teenagers have different needs, so this adult estimator is not suitable for them. Ask a doctor or paediatrician for guidance.</p></div></div>
+      <div class="item"><button class="q" aria-expanded="false">Is this Water Intake Estimator free to use?<b></b></button><div class="a"><p>Yes, it is completely free and needs no sign-up.</p></div></div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="footer">
+  <div class="container fgrid">
+    <div class="fbrand">
+      <a href="index.html#home" class="logo"><span>F</span>itCalc</a>
+      <p>Simple and free fitness calculators to help you understand your health and wellness.</p>
+    </div>
+    <div><h4>Quick Links</h4><ul>
+      <li><a href="index.html#home">Home</a></li><li><a href="index.html#tools">Tools</a></li><li><a href="index.html#about">About Us</a></li><li><a href="index.html#faq">FAQ</a></li></ul></div>
+    <div><h4>Our Calculators</h4><ul>
+      <li><a href="bmi.html">BMI Calculator</a></li>
+      <li><a href="chlorine.html">Daily Chlorine Calculator</a></li>
+      <li><a href="bmr.html">BMR Calculator</a></li>
+      <li><a href="water-intake.html">Water Intake Estimator</a></li>
+      <li><a href="tools/healthy-weight-range-estimator.html">Healthy Weight Range Estimator</a></li>
+      <li><a href="tools/body-fat-calculator.html">Body Fat Calculator</a></li></ul></div>
+    <div><h4>Legal Links</h4><ul>
+      <li><a href="privacy-policy.html">Privacy Policy</a></li><li><a href="terms.html">Terms &amp; Conditions</a></li><li><a href="disclaimer.html">Disclaimer</a></li><li><a href="contact.html">Contact Us</a></li></ul></div>
+  </div>
+  <p class="copy">© 2026 FitCalc. All Rights Reserved.</p>
+</footer>
+
+<script src="script.js"></script>
+<script src="water-intake.js"></script>
+</body>
+</html>

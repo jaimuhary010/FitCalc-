@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Body Fat Calculator – U.S. Navy Body Fat Percentage Calculator | FitCalc</title>
+<meta name="description" content="Use the free FitCalc Body Fat Calculator to estimate your body fat percentage by measurements with the U.S. Navy method. Enter height, neck, waist and hip (women) in cm or inches.">
+<link rel="canonical" href="https://your-domain.com/body-fat.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="FitCalc">
+<meta property="og:title" content="Body Fat Calculator – U.S. Navy Body Fat Percentage Calculator | FitCalc">
+<meta property="og:description" content="Estimate your body fat percentage from simple tape measurements. Free, private and easy to use.">
+<meta property="og:url" content="https://your-domain.com/body-fat.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="bmi.css">
+<link rel="stylesheet" href="bmr.css">
+<link rel="stylesheet" href="body-fat.css">
+</head>
+<body>
+
+<header class="hero page-hero" id="home">
+  <nav class="nav container">
+    <a href="index.html#home" class="logo"><span>F</span>itCalc</a>
+    <button class="menu-btn" aria-label="Menu" aria-expanded="false"><i></i><i></i><i></i></button>
+    <ul class="links">
+      <li><a href="index.html#home">Home</a></li>
+      <li><a href="index.html#tools">Tools</a></li>
+      <li><a href="index.html#about">About Us</a></li>
+      <li><a href="index.html#faq">FAQ</a></li>
+    </ul>
+    <a href="index.html#tools" class="btn btn-sm cta-nav">Get Started</a>
+  </nav>
+  <div class="container page-title">
+    <h1>Free Body Fat Calculator</h1>
+    <p>Estimate your body fat percentage from simple body measurements using the U.S. Navy method.</p>
+  </div>
+</header>
+
+<main>
+<section class="calc-sec">
+  <div class="container"><p class="intro">📐 This Body Fat Percentage Calculator uses tape measurements of your <strong>height, neck, waist</strong> and (for the female equation) <strong>hips</strong>. The result is an <strong>estimate based on circumference measurements</strong>, not a direct measurement of body fat. See the <a href="#guide">measurement guide</a> below.</p></div>
+  <div class="container calc">
+    <form class="calc-form" id="bfForm" novalidate>
+      <fieldset class="field">
+        <legend>Calculation formula</legend>
+        <div class="pills">
+          <label><input type="radio" name="sex" value="male"><span>Male equation</span></label>
+          <label><input type="radio" name="sex" value="female"><span>Female equation</span></label>
+        </div>
+        <span class="hint">These equations use sex-specific body circumference formulas and may not suit every individual. The female equation also needs a hip measurement.</span>
+        <span class="err" id="e-sex"></span>
+      </fieldset>
+
+      <div class="field">
+        <label for="cm">Height</label>
+        <div class="seg sm" data-for="h"><button type="button" class="on" data-u="cm" aria-pressed="true">cm</button><button type="button" data-u="ftin" aria-pressed="false">ft / in</button></div>
+        <div id="hCm"><input type="number" id="cm" inputmode="decimal" step="0.1" placeholder="e.g. 175"></div>
+        <div id="hFt" class="two" hidden><input type="number" id="ft" inputmode="numeric" placeholder="ft" aria-label="Feet"><input type="number" id="inch" inputmode="decimal" step="0.1" placeholder="in" aria-label="Inches"></div>
+        <span class="err" id="e-h"></span>
+      </div>
+
+      <div class="field">
+        <label>Body measurements</label>
+        <div class="seg sm" data-for="c"><button type="button" class="on" data-u="cm" aria-pressed="true">cm</button><button type="button" data-u="in" aria-pressed="false">inches</button></div>
+        <span class="ml">Neck circumference</span>
+        <input type="number" id="neck" inputmode="decimal" step="0.1" placeholder="e.g. 38">
+        <span class="err" id="e-neck"></span>
+        <span class="ml gap">Waist circumference <small>(at the navel)</small></span>
+        <input type="number" id="waist" inputmode="decimal" step="0.1" placeholder="e.g. 85">
+        <span class="err" id="e-waist"></span>
+        <div id="hipWrap" hidden>
+          <span class="ml gap">Hip circumference <small>(widest part, female equation)</small></span>
+          <input type="number" id="hip" inputmode="decimal" step="0.1" placeholder="e.g. 98">
+          <span class="err" id="e-hip"></span>
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="wt">Current body weight <small>(optional)</small></label>
+        <div class="seg sm" data-for="w"><button type="button" class="on" data-u="kg" aria-pressed="true">kg</button><button type="button" data-u="lb" aria-pressed="false">lbs</button></div>
+        <input type="number" id="wt" inputmode="decimal" step="any" placeholder="Optional – e.g. 75">
+        <span class="hint">Enter your weight to also see an estimated fat mass and lean mass.</span>
+        <span class="err" id="e-wt"></span>
+      </div>
+
+      <div class="actions">
+        <button type="submit" class="btn">Calculate</button>
+        <button type="button" class="btn-ghost" id="resetBtn">Reset</button>
+      </div>
+    </form>
+
+    <div class="result" id="result" aria-live="polite">
+      <div class="empty" id="empty"><div class="big">📏</div><p>Choose an equation, enter your measurements and select <strong>Calculate</strong> to see your estimate here.</p></div>
+      <div class="out" id="out" hidden>
+        <div class="rcard main ringcard">
+          <div class="ring" role="img" aria-label="Body fat percentage progress ring">
+            <svg viewBox="0 0 120 120"><circle class="bg" cx="60" cy="60" r="52"/><circle class="fg" id="ringFg" cx="60" cy="60" r="52"/></svg>
+            <div class="rv"><span id="bfVal">0</span><small>%</small></div>
+          </div>
+          <div class="rt">
+            <p class="lbl">Estimated body fat percentage</p>
+            <span class="chip" id="eqChip"></span>
+            <p class="small-note">Estimate from circumference measurements, not a direct measurement.</p>
+          </div>
+        </div>
+        <div class="stats">
+          <div><small>Equation used</small><b id="sEq"></b></div>
+          <div><small>Height</small><b id="sH"></b></div>
+          <div><small>Neck</small><b id="sN"></b></div>
+          <div><small>Waist</small><b id="sW"></b></div>
+          <div id="sHipBox" hidden><small>Hip</small><b id="sHip"></b></div>
+          <div id="sWtBox" hidden><small>Current weight</small><b id="sWt"></b></div>
+          <div id="sFatBox" hidden><small>Fat mass</small><b id="sFat"></b></div>
+          <div id="sLeanBox" hidden><small>Lean mass</small><b id="sLean"></b></div>
+        </div>
+        <p class="explain">Your estimated body fat percentage is based on the measurements you provided. Actual body composition may differ.</p>
+        <p class="vs">No health category is assigned. Reference ranges vary by age, sex, population and source, and this result is not a diagnosis.</p>
+        <div class="actions"><button type="button" class="btn" id="recalc">Recalculate</button><button type="button" class="btn-ghost" id="resetBtn2">Reset</button></div>
+      </div>
+    </div>
+  </div>
+  <div class="container"><p class="note"><strong>Disclaimer:</strong> This calculator gives an educational estimate and is not medical advice. Circumference-based methods can be inaccurate for some people. Speak to a healthcare professional about your body composition or health.</p></div>
+</section>
+
+<section class="info-sec" id="guide">
+  <div class="container">
+    <h2 class="title">How to Take Your Measurements</h2>
+    <p class="sub">Use a flexible measuring tape, keep it snug without squeezing the skin, and measure the same way each time.</p>
+    <div class="info-grid g4">
+      <div class="info c-yellow"><span class="ic i-yellow">1</span><h3>Height</h3><p>Stand straight without shoes, heels together and back against a wall. Look straight ahead and mark the top of your head.</p></div>
+      <div class="info c-purple"><span class="ic i-purple">2</span><h3>Neck</h3><p>Measure just below the larynx (Adam's apple), with the tape sloping slightly down toward the front. Keep shoulders relaxed.</p></div>
+      <div class="info c-green"><span class="ic i-green">3</span><h3>Waist</h3><p>Measure around the waist at the level of your navel after a relaxed breath out. Keep the tape level and do not pull in your stomach.</p></div>
+      <div class="info c-pink"><span class="ic i-pink">4</span><h3>Hips</h3><p>For the female equation, measure around the widest part of the hips and buttocks, with feet together and the tape level.</p></div>
+    </div>
+    <ul class="tips">
+      <li>Use a flexible tape, snug but not compressing the skin.</li>
+      <li>Measure bare skin or thin clothing, and take each measurement twice.</li>
+      <li>Use the same positions and time of day whenever you re-measure.</li>
+    </ul>
+  </div>
+</section>
+
+<article class="article">
+  <div class="container narrow">
+    <h2>Body Fat Calculator: Understanding Body Fat Percentage by Measurements</h2>
+
+    <h3>What Is Body Fat Percentage?</h3>
+    <p>Body fat percentage is the share of your total body weight that is fat. The rest is lean body mass, which includes muscle, bone, organs and water. Some fat is essential for hormone function, energy storage and protecting organs, so the goal is not zero fat.</p>
+
+    <h3>How Does a Body Fat Calculator Work?</h3>
+    <p>A Body Fat Calculator estimates your percentage from measurements instead of scanning your body. You enter simple numbers such as height and circumferences, and a formula turns them into an estimate. A Body Fat Estimator is convenient and free, but it is only as reliable as the measurements and the equation behind it.</p>
+
+    <h3>What Is the U.S. Navy Body Fat Method?</h3>
+    <p>The U.S. Navy Body Fat Calculator uses a published circumference-based method. It applies base-10 logarithms to height and to the difference between waist and neck, and for women it adds the hip measurement. Because the equations are sex-specific, there is a male and a female version.</p>
+
+    <h3>Why Are Waist, Neck and Hip Measurements Important?</h3>
+    <p>Fat stored around the middle tends to differ from fat stored elsewhere, so waist size is a strong clue. The neck acts as a rough guide to lean tissue in the upper body, and the hips reflect fat distribution, which is why they matter in the female equation. Together these allow Body Fat Percentage by Measurements to be estimated.</p>
+
+    <h3>Difference Between Body Fat Mass and Lean Body Mass</h3>
+    <p>Fat mass is the weight of fat in your body, and lean body mass is everything else. If you enter your weight, fat mass equals weight times body fat percentage divided by 100, and lean mass is the remainder. Both figures are estimates that depend on the percentage.</p>
+
+    <h3>Body Fat Percentage Versus BMI</h3>
+    <p>BMI compares weight with height and cannot tell muscle from fat. Body fat percentage tries to describe composition itself, so it can add context, especially for muscular or very sedentary people. Neither number is a diagnosis on its own.</p>
+
+    <h3>Limitations of Circumference-Based Estimates</h3>
+    <p>When you Calculate Body Fat Percentage this way, small measuring errors can shift the result noticeably. The method may also be less accurate for very lean or very heavy people, older adults, and body shapes that differ from the groups used to build the equations. Treat the result as a rough guide.</p>
+
+    <h3>Other Methods of Measuring Body Composition</h3>
+    <p>Other options include skinfold calipers, bioelectrical impedance scales, DEXA scans, hydrostatic weighing and air displacement plethysmography. These can be more precise but may need equipment or a clinic visit. A healthcare professional can advise which method suits you.</p>
+  </div>
+</article>
+
+<section class="faq" id="faq">
+  <div class="container narrow">
+    <h2 class="title">Frequently Asked Questions</h2>
+    <p class="sub">Quick answers about body fat and this calculator.</p>
+    <div class="acc">
+      <div class="item"><button class="q" aria-expanded="false">What is body fat percentage?<b></b></button><div class="a"><p>It is the proportion of your total body weight that is fat tissue. The rest is lean body mass such as muscle, bone, organs and water.</p></div></div>
+      <div class="item"><button class="q" aria-expanded="false">How do I calculate my body fat percentage?<b></b></button><div class="a"><p>Measure your height, neck, waist and (for women) hips, choose the matching equation above and select Calculate. The tool applies the U.S. Navy formula for you.</p></div></div>
+      <div class="item"><button class="q" aria-expanded="false">How accurate is the U.S. Navy body fat method?<b></b></button><div class="a"><p>It gives a reasonable estimate for many people, but it is not a direct measurement. Results can be off by several percentage points, and careful, consistent measuring matters.</p></div></div>
+      <div class="item"><button class="q" aria-expanded="false">What measurements are required for this calculator?<b></b></button><div class="a"><p>Height, neck circumference and waist circumference are required. Hip circumference is required for the female equation. Body weight is optional.</p></div></div>
+      <div class="item"><button class="q" aria-expanded="false">Why does the female equation require hip measurements?<b></b></button><div class="a"><p>The female equation was built to include hip size because fat distribution around the hips differs on average between sexes, which improves the estimate.</p></div></div>
+      <div class="item"><button class="q" aria-expanded="false">What is the difference between BMI and body fat percentage?<b></b></button><div class="a"><p>BMI compares weight with height and cannot separate muscle from fat. Body fat percentage estimates how much of your weight is fat.</p></div></div>
+      <div class="item"><button class="q" aria-expanded="false">What is fat mass?<b></b></button><div class="a"><p>Fat mass is the total weight of fat in your body. It equals body weight × body fat percentage ÷ 100.</p></div></div>
+      <div class="item"><button class="q" aria-expanded="false">What is lean body mass?<b></b></button><div class="a"><p>Lean body mass is everything in your body except fat, including muscle, bone, organs and water. It equals body weight minus fat mass.</p></div></div>
+      <div class="item"><button class="q" aria-expanded="false">Can I calculate body fat without special equipment?<b></b></button><div class="a"><p>Yes. This calculator only needs a flexible measuring tape. The result is an estimate rather than a precise measurement.</p></div></div>
+      <div class="item"><button class="q" aria-expanded="false">Which method gives the most accurate body fat measurement?<b></b></button><div class="a"><p>Clinical methods such as DEXA scans are generally considered more precise than tape-based estimates, but every method has limits. A healthcare professional can advise on the best option for you.</p></div></div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="footer">
+  <div class="container fgrid">
+    <div class="fbrand">
+      <a href="index.html#home" class="logo"><span>F</span>itCalc</a>
+      <p>Simple and free fitness calculators to help you understand your health and wellness.</p>
+    </div>
+    <div><h4>Quick Links</h4><ul>
+      <li><a href="index.html#home">Home</a></li><li><a href="index.html#tools">Tools</a></li><li><a href="index.html#about">About Us</a></li><li><a href="index.html#faq">FAQ</a></li></ul></div>
+    <div><h4>Our Calculators</h4><ul>
+      <li><a href="bmi.html">BMI Calculator</a></li>
+      <li><a href="chlorine.html">Daily Chlorine Calculator</a></li>
+      <li><a href="bmr.html">BMR Calculator</a></li>
+      <li><a href="water-intake.html">Water Intake Estimator</a></li>
+      <li><a href="healthy-weight.html">Healthy Weight Range Estimator</a></li>
+      <li><a href="body-fat.html">Body Fat Calculator</a></li></ul></div>
+    <div><h4>Legal Links</h4><ul>
+      <li><a href="privacy-policy.html">Privacy Policy</a></li><li><a href="terms.html">Terms &amp; Conditions</a></li><li><a href="disclaimer.html">Disclaimer</a></li><li><a href="contact.html">Contact Us</a></li></ul></div>
+  </div>
+  <p class="copy">© 2026 FitCalc. All Rights Reserved.</p>
+</footer>
+
+<script src="script.js"></script>
+<script src="body-fat.js"></script>
+</body>
+</html>

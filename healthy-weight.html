@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Healthy Weight Range Calculator – Healthy Weight by Height | FitCalc</title>
+<meta name="description" content="Use the free FitCalc Healthy Weight Range Calculator to see your BMI healthy weight range (BMI 18.5–24.9) for your height in kg and lbs. A general screening estimate for adults.">
+<link rel="canonical" href="https://your-domain.com/healthy-weight.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="FitCalc">
+<meta property="og:title" content="Healthy Weight Range Calculator – Healthy Weight by Height | FitCalc">
+<meta property="og:description" content="Estimate the BMI-based healthy weight range for your height in kg and lbs. Free, simple and private.">
+<meta property="og:url" content="https://your-domain.com/healthy-weight.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="bmi.css">
+<link rel="stylesheet" href="bmr.css">
+<link rel="stylesheet" href="healthy-weight.css">
+</head>
+<body>
+
+<header class="hero page-hero" id="home">
+  <nav class="nav container">
+    <a href="index.html#home" class="logo"><span>F</span>itCalc</a>
+    <button class="menu-btn" aria-label="Menu" aria-expanded="false"><i></i><i></i><i></i></button>
+    <ul class="links">
+      <li><a href="index.html#home">Home</a></li>
+      <li><a href="index.html#tools">Tools</a></li>
+      <li><a href="index.html#about">About Us</a></li>
+      <li><a href="index.html#faq">FAQ</a></li>
+    </ul>
+    <a href="index.html#tools" class="btn btn-sm cta-nav">Get Started</a>
+  </nav>
+  <div class="container page-title">
+    <h1>Free Healthy Weight Range Calculator</h1>
+    <p>Discover an estimated healthy weight range for your height, based on the standard adult BMI screening range.</p>
+  </div>
+</header>
+
+<main>
+<section class="calc-sec">
+  <div class="container"><p class="intro">⚖️ This Healthy Weight Estimator shows the weights that fall within a BMI of <strong>18.5–24.9</strong> for your height. It is a <strong>general screening estimate for adults</strong>, not an individualised ideal weight, and it may not suit everyone.</p></div>
+  <div class="container calc">
+    <form class="calc-form" id="hwForm" novalidate>
+      <div class="field">
+        <label for="cm">Height</label>
+        <div class="seg sm" data-for="h"><button type="button" class="on" data-u="cm" aria-pressed="true">cm</button><button type="button" data-u="ftin" aria-pressed="false">ft / in</button></div>
+        <div id="hCm"><input type="number" id="cm" inputmode="decimal" step="0.1" placeholder="e.g. 170"></div>
+        <div id="hFt" class="two" hidden><input type="number" id="ft" inputmode="numeric" placeholder="ft" aria-label="Feet"><input type="number" id="inch" inputmode="decimal" step="0.1" placeholder="in" aria-label="Inches"></div>
+        <span class="err" id="e-h"></span>
+      </div>
+
+      <div class="field"><label for="age">Age <small>(years, adults 18+)</small></label>
+        <input type="number" id="age" inputmode="numeric" placeholder="e.g. 30"><span class="err" id="e-age"></span></div>
+
+      <fieldset class="field">
+        <legend>Gender <small>(optional)</small></legend>
+        <div class="pills">
+          <label><input type="radio" name="gender" value="male"><span>Male</span></label>
+          <label><input type="radio" name="gender" value="female"><span>Female</span></label>
+          <label><input type="radio" name="gender" value="na"><span>Prefer not to say</span></label>
+        </div>
+        <span class="hint">Gender does not change this BMI-based calculation.</span>
+      </fieldset>
+
+      <div class="field">
+        <label for="wt">Weight unit <small>and current weight (optional)</small></label>
+        <div class="seg sm" data-for="w"><button type="button" class="on" data-u="kg" aria-pressed="true">kg</button><button type="button" data-u="lb" aria-pressed="false">lbs</button></div>
+        <input type="number" id="wt" inputmode="decimal" step="any" placeholder="Optional – e.g. 68">
+        <span class="hint">Leave blank to see only the estimated range. If you enter your weight, it is shown on the indicator.</span>
+        <span class="err" id="e-wt"></span>
+      </div>
+
+      <div class="actions">
+        <button type="submit" class="btn">Calculate</button>
+        <button type="button" class="btn-ghost" id="resetBtn">Reset</button>
+      </div>
+    </form>
+
+    <div class="result" id="result" aria-live="polite">
+      <div class="empty" id="empty"><div class="big">📏</div><p>Enter your height and age, then select <strong>Calculate</strong> to see your estimated range here.</p></div>
+      <div class="out" id="out" hidden>
+        <div class="rcard notice" id="noticeCard" hidden><p class="msg warn" id="noticeMsg"></p></div>
+        <div id="resBody">
+          <div class="rcard main">
+            <p class="lbl">Estimated BMI healthy weight range for your height</p>
+            <div class="num" id="rMain"></div>
+            <span class="chip" id="rAlt"></span>
+          </div>
+
+          <div class="range" aria-label="Weight range indicator">
+            <div class="zones"><i class="z1" id="z1"></i><i class="z2" id="z2"></i><i class="z3" id="z3"></i><b id="mark" hidden></b></div>
+            <div class="zl"><span class="l1">Below range</span><span class="l2">Within range</span><span class="l3">Above range</span></div>
+            <div class="zv"><span id="vMin"></span><span id="vMax"></span></div>
+            <p class="pos" id="pos"></p>
+          </div>
+
+          <div class="stats">
+            <div><small>Minimum healthy weight</small><b id="sMin"></b></div>
+            <div><small>Maximum healthy weight</small><b id="sMax"></b></div>
+            <div><small>BMI screening range</small><b>18.5 – 24.9</b></div>
+            <div><small>Your height</small><b id="sH"></b></div>
+            <div><small>Range in kg</small><b id="sKg"></b></div>
+            <div><small>Range in lbs</small><b id="sLb"></b></div>
+          </div>
+          <p class="explain" id="how"></p>
+        </div>
+        <div class="actions"><button type="button" class="btn" id="recalc">Recalculate</button><button type="button" class="btn-ghost" id="resetBtn2">Reset</button></div>
+      </div>
+    </div>
+  </div>
+  <div class="container"><p class="note"><strong>Important:</strong> This is a general adult screening estimate, not an individualised ideal weight, and it is not suitable for children or teenagers. BMI does not measure body fat or tell muscle from fat. Pregnancy and certain medical or body-composition situations need individualised professional guidance. Speak to a healthcare professional about your weight.</p></div>
+</section>
+
+<section class="info-sec">
+  <div class="container">
+    <h2 class="title">Understanding Your Healthy Weight Range</h2>
+    <p class="sub">How a Healthy Weight Range Calculator works, and what it can and cannot tell you.</p>
+    <div class="info-grid">
+      <div class="info c-green"><span class="ic i-green">🎯</span><h3>What Is a Healthy Weight Range?</h3><p>A healthy weight range is a span of body weights considered lower risk for most adults of a given height. It is a range, not a single ideal weight, because healthy bodies come in many shapes. The Ideal Weight Range you see here is a screening guide, not a personal target.</p></div>
+      <div class="info c-purple"><span class="ic i-purple">🧮</span><h3>How Is It Calculated?</h3><p>The BMI Healthy Weight Range uses the adult BMI band of 18.5 to 24.9. Your height in metres is squared, then multiplied by 18.5 for the minimum and by 24.9 for the maximum. For example, a height of 1.70 m gives 1.70 × 1.70 = 2.89, so the range is about 53.5 to 72.0 kg.</p></div>
+      <div class="info c-yellow"><span class="ic i-yellow">📊</span><h3>What Is BMI?</h3><p>Body Mass Index compares weight with height: weight in kilograms divided by height in metres squared. Health organisations use it as a quick screening tool to group adults as underweight, healthy weight, overweight or obese. It is a starting point for a conversation, not a diagnosis.</p></div>
+      <div class="info c-blue"><span class="ic i-blue">📏</span><h3>Why Does Height Matter?</h3><p>Taller people naturally carry more body mass, so the same weight can mean different things at different heights. That is why Healthy Weight by Height is shown as a range that rises as height increases. Even a few centimetres can shift the range by several kilograms.</p></div>
+      <div class="info c-red"><span class="ic i-red">🔎</span><h3>BMI Is Not the Whole Story</h3><p>BMI says nothing about where fat is stored, fitness, diet, sleep, blood pressure or family history. Two people with the same BMI can have very different health. Age, ethnicity and medical conditions can also change what is healthy, so BMI should be read with other measures.</p></div>
+      <div class="info c-pink"><span class="ic i-pink">💪</span><h3>Muscle Mass and Body Composition</h3><p>BMI cannot tell muscle from fat. Muscular athletes may fall above the range despite low body fat, while someone with little muscle can sit inside it yet carry extra fat. Measures such as waist size or body fat percentage can add useful context.</p></div>
+    </div>
+  </div>
+</section>
+  
+<article class="article">
+  <div class="container narrow">
+    <h2>Healthy Weight Range Calculator: Find Your Estimated Healthy Weight by Height</h2>
+    <p>Understanding your healthy weight range can help you learn more about your body and general health. A Healthy Weight Range Calculator estimates a weight range based on your height using the Body Mass Index (BMI) screening categories. Instead of focusing on one specific number, it provides an estimated range that can be used as a general reference for adults.</p>
+    
+    <h3>What Is a Healthy Weight Range?</h3>
+    <p>A healthy weight range is an estimated range of body weight associated with a particular height. For adults, BMI categories are commonly used as a screening tool to understand how body weight relates to height. The standard adult BMI range of 18.5 to 24.9 is commonly classified as the healthy-weight category.</p>
+    <p>However, this range is only a general screening reference. It does not determine whether someone is healthy because individual health depends on several factors, including body composition, age, lifestyle, and medical history.</p>
+
+    <h3>How Does a Healthy Weight Range Calculator Work?</h3>
+    <p>Our Healthy Weight Range Estimator uses your height to calculate an estimated weight range based on the adult BMI screening range.</p>
+    <p>The calculation uses two simple formulas:</p>
+    <p>• Minimum weight = 18.5 × height (in metres)²</p>
+    <p>• Maximum weight = 24.9 × height (in metres)²</p>
+    <p>For example, if your height is 1.70 metres, the calculator estimates the weight range using these BMI values. This provides a quick way to understand the BMI-based healthy weight range for your height.</p>
+
+    <h3>Why Does Height Matter When Estimating Weight?</h3>
+    <p>Height plays an important role in BMI calculations because BMI compares body weight with height squared. Two adults with the same weight may have different BMI values if their heights are different.</p>
+    <p>Using a Healthy Weight by Height Calculator can help you understand this relationship and see an estimated weight range rather than concentrating on a single target weight.</p>
+
+    <h3>Is BMI Enough to Determine a Healthy Weight?</h3>
+    <p>BMI is useful for general screening, but it has limitations. It does not directly measure body fat or distinguish between muscle mass and fat mass. For example, someone with a higher amount of muscle may have a higher BMI without having the same body composition as someone with less muscle.</p>
+    <p>Other factors, such as waist circumference, physical activity, nutrition, and overall health, can also provide useful context.</p>
+
+    <h3>Use Your Estimated Weight Range as a General Guide</h3>
+    <p>Our free Healthy Weight Range Calculator makes it easy to estimate a BMI-based weight range using your height. The result is intended for educational purposes and should not be treated as a personalized medical recommendation or an exact ideal weight.</p>
+    <p>This calculator is designed for adults aged 20 and above. It is not intended for children, teenagers, or use during pregnancy. People with specific medical conditions or individual body-composition concerns should consult a qualified healthcare professional for personalized guidance.</p>
+  </div>
+</article>
+<section class="faq" id="faq">
+  <div class="container narrow">
+    <h2 class="title">Frequently Asked Questions</h2>
+    <p class="sub">Quick answers about healthy weight ranges and this calculator.</p>
+    <div class="acc">
+      <div class="item"><button class="q" aria-expanded="false">What is a healthy weight range?<b></b></button><div class="a"><p>It is the span of weights for a given height that falls within the standard adult BMI band of 18.5 to 24.9. It is a general guide, not a personal target.</p></div></div>
+      <div class="item"><button class="q" aria-expanded="false">How do I calculate my healthy weight?<b></b></button><div class="a"><p>Convert your height to metres and square it. Multiply by 18.5 for the lower limit and by 24.9 for the upper limit. Or enter your height above and the calculator does it for you.</p></div></div>
+      <div class="item"><button class="q" aria-expanded="false">What is the healthy weight range for my height?<b></b></button><div class="a"><p>It depends on your exact height. Enter it in cm or ft/in and the calculator shows your range in kg and lbs.</p></div></div>
+      <div class="item"><button class="q" aria-expanded="false">Is BMI a reliable way to estimate healthy weight?<b></b></button><div class="a"><p>BMI is a useful, simple screening tool for groups, but it is not a complete or individual measure. It ignores muscle, fat distribution and overall health.</p></div></div>
+      <div class="item"><button class="q" aria-expanded="false">Does age affect healthy weight?<b></b></button><div class="a"><p>The adult BMI range is the same from age 18, but what is healthy for an individual can change with age, for example with muscle loss in older adults. This calculator is for adults only.</p></div></div>
+      <div class="item"><button class="q" aria-expanded="false">Does gender affect the BMI-based weight range?<b></b></button><div class="a"><p>No. The BMI formula and the 18.5–24.9 range are the same for men and women, so gender does not change this calculation. Body composition can still differ between people.</p></div></div>
+      <div class="item"><button class="q" aria-expanded="false">Can muscular people have a higher BMI?<b></b></button><div class="a"><p>Yes. Muscle is dense, so athletes and very muscular people can have a high BMI without excess body fat.</p></div></div>
+      <div class="item"><button class="q" aria-expanded="false">Is the healthy weight range the same for everyone?<b></b></button><div class="a"><p>No. The range depends on height and is only a general screening estimate. Body build, ethnicity, health conditions and pregnancy can all affect what is right for an individual.</p></div></div>
+      <div class="item"><button class="q" aria-expanded="false">Can I use this calculator for teenagers?<b></b></button><div class="a"><p>No. Children and teenagers need age- and sex-specific growth charts, so the adult range does not apply. Ask a doctor or paediatrician.</p></div></div>
+      <div class="item"><button class="q" aria-expanded="false">Should I consult a healthcare professional about my weight?<b></b></button><div class="a"><p>Yes, if you have concerns, health conditions, are pregnant, or want to change your weight. A professional can look at your whole health picture.</p></div></div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="footer">
+  <div class="container fgrid">
+    <div class="fbrand">
+      <a href="index.html#home" class="logo"><span>F</span>itCalc</a>
+      <p>Simple and free fitness calculators to help you understand your health and wellness.</p>
+    </div>
+    <div><h4>Quick Links</h4><ul>
+      <li><a href="index.html#home">Home</a></li><li><a href="index.html#tools">Tools</a></li><li><a href="index.html#about">About Us</a></li><li><a href="index.html#faq">FAQ</a></li></ul></div>
+    <div><h4>Our Calculators</h4><ul>
+      <li><a href="bmi.html">BMI Calculator</a></li>
+      <li><a href="chlorine.html">Daily Chlorine Calculator</a></li>
+      <li><a href="bmr.html">BMR Calculator</a></li>
+      <li><a href="water-intake.html">Water Intake Estimator</a></li>
+      <li><a href="healthy-weight.html">Healthy Weight Range Estimator</a></li>
+      <li><a href="tools/body-fat-calculator.html">Body Fat Calculator</a></li></ul></div>
+    <div><h4>Legal Links</h4><ul>
+      <li><a href="privacy-policy.html">Privacy Policy</a></li><li><a href="terms.html">Terms &amp; Conditions</a></li><li><a href="disclaimer.html">Disclaimer</a></li><li><a href="contact.html">Contact Us</a></li></ul></div>
+  </div>
+  <p class="copy">© 2026 FitCalc. All Rights Reserved.</p>
+</footer>
+
+<script src="script.js"></script>
+<script src="healthy-weight.js"></script>
+</body>
+</html>
