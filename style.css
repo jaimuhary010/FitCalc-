@@ -131,9 +131,6 @@ button{font-family:inherit;cursor:pointer;border:0;background:none}
 img { max-width: 100%; height: auto; }
 
 @media (max-width: 768px) {
-  /* Navbar: links chhupao, hamburger dikhao */
-  .nav-links { display: none; }
-  .menu-btn { display: block; }
 
   /* Hero: upar-neeche stack */
   .hero {
