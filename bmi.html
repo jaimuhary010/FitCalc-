@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Free BMI Calculator – Check Your Body Mass Index | FitCalc</title>
+<meta name="description" content="Use the free FitCalc BMI Calculator to find your Body Mass Index and BMI category in metric or imperial units, plus a clear guide to understanding your BMI score.">
+<link rel="canonical" href="https://your-domain.com/bmi.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="bmi.css">
+</head>
+<body>
+
+<header class="hero page-hero" id="home">
+  <nav class="nav container">
+    <a href="index.html#home" class="logo"><span>F</span>itCalc</a>
+    <button class="menu-btn" aria-label="Menu" aria-expanded="false"><i></i><i></i><i></i></button>
+    <ul class="links">
+      <li><a href="index.html#home">Home</a></li>
+      <li><a href="index.html#tools">Tools</a></li>
+      <li><a href="index.html#about">About Us</a></li>
+      <li><a href="index.html#faq">FAQ</a></li>
+    </ul>
+    <a href="index.html#tools" class="btn btn-sm cta-nav">Get Started</a>
+  </nav>
+  <div class="container page-title">
+    <h1>Free BMI Calculator</h1>
+    <p>Calculate your Body Mass Index and understand your healthy weight category using your height and weight.</p>
+  </div>
+</header>
+
+<main>
+<section class="calc-sec">
+  <div class="container calc">
+    <form class="calc-form" id="bmiForm" novalidate>
+      <div class="seg" role="radiogroup" aria-label="Units">
+        <button type="button" class="on" data-unit="metric" role="radio" aria-checked="true">Metric (kg / cm)</button>
+        <button type="button" data-unit="imperial" role="radio" aria-checked="false">Imperial (lbs / ft / in)</button>
+      </div>
+
+      <fieldset class="field">
+        <legend>Gender <small>(optional)</small></legend>
+        <div class="pills">
+          <label><input type="radio" name="gender" value="male"><span>Male</span></label>
+          <label><input type="radio" name="gender" value="female"><span>Female</span></label>
+          <label><input type="radio" name="gender" value="other"><span>Prefer not to say</span></label>
+        </div>
+      </fieldset>
+
+      <div class="field"><label for="age">Age <small>(years)</small></label>
+        <input type="number" id="age" inputmode="numeric" min="2" max="120" placeholder="e.g. 30"><span class="err" id="e-age"></span></div>
+
+      <div class="field" id="hMetric"><label for="cm">Height <small>(cm)</small></label>
+        <input type="number" id="cm" inputmode="decimal" step="0.1" placeholder="e.g. 170"><span class="err" id="e-cm"></span></div>
+      <div class="field" id="hImp" hidden><label for="ft">Height <small>(ft / in)</small></label>
+        <div class="two"><input type="number" id="ft" inputmode="numeric" placeholder="ft" aria-label="Feet"><input type="number" id="inch" inputmode="decimal" step="0.1" placeholder="in" aria-label="Inches"></div>
+        <span class="err" id="e-ft"></span></div>
+
+      <div class="field" id="wMetric"><label for="kg">Weight <small>(kg)</small></label>
+        <input type="number" id="kg" inputmode="decimal" step="0.1" placeholder="e.g. 68"><span class="err" id="e-kg"></span></div>
+      <div class="field" id="wImp" hidden><label for="lb">Weight <small>(lbs)</small></label>
+        <input type="number" id="lb" inputmode="decimal" step="0.1" placeholder="e.g. 150"><span class="err" id="e-lb"></span></div>
+
+      <div class="actions">
+        <button type="submit" class="btn">Calculate BMI</button>
+        <button type="button" class="btn-ghost" id="resetBtn">Reset</button>
+      </div>
+    </form>
+
+    <div class="result" id="result" aria-live="polite">
+      <div class="empty" id="empty"><div class="big">⚖️</div><p>Enter your details and select <strong>Calculate BMI</strong> to see your result here.</p></div>
+      <div class="out" id="out" hidden>
+        <p class="lbl">Your BMI Score</p>
+        <div class="score" id="score">0</div>
+        <span class="badge" id="cat">Category</span>
+        <div class="meter"><i class="s1"></i><i class="s2"></i><i class="s3"></i><i class="s4"></i><b id="marker"></b></div>
+        <div class="scale"><span>18.5</span><span>25</span><span>30</span></div>
+        <ul class="legend"><li><u class="s1"></u>Under 18.5</li><li><u class="s2"></u>18.5–24.9</li><li><u class="s3"></u>25–29.9</li><li><u class="s4"></u>30+</li></ul>
+        <p class="explain" id="explain"></p>
+        <div class="actions"><button type="button" class="btn" id="recalc">Recalculate</button><button type="button" class="btn-ghost" id="resetBtn2">Reset</button></div>
+      </div>
+    </div>
+  </div>
+  <div class="container"><p class="note"><strong>Disclaimer:</strong> BMI is a screening measure, not a diagnosis. Standard BMI categories apply to adults aged 20 and over. For children and teenagers, BMI must be read on age- and sex-specific percentile charts, so adult categories are not applied here. Talk to a healthcare professional about your health.</p></div>
+</section>
+
+<section class="info-sec">
+  <div class="container">
+    <h2 class="title">Everything You Should Know About BMI</h2>
+    <p class="sub">A quick guide to what your number means and how to use it wisely.</p>
+    <div class="info-grid">
+      <div class="info c-yellow"><span class="ic i-yellow">📏</span><h3>What is BMI?</h3><p>Body Mass Index is a number that relates your weight to your height. It is a simple screening tool for weight categories.</p></div>
+      <div class="info c-green"><span class="ic i-green">🧮</span><h3>How is BMI calculated?</h3><p>Metric: weight (kg) ÷ height (m)². Imperial: weight (lbs) × 703 ÷ height (in)².</p></div>
+      <div class="info c-purple"><span class="ic i-purple">🎯</span><h3>Understanding BMI categories</h3><p>Below 18.5 is underweight, 18.5–24.9 normal weight, 25–29.9 overweight, and 30 or above obesity (adults).</p></div>
+      <div class="info c-pink"><span class="ic i-pink">❤️</span><h3>Why is BMI important?</h3><p>It is a fast, free way to spot weight ranges linked with higher health risks, and to track change over time.</p></div>
+      <div class="info c-red"><span class="ic i-red">⚠️</span><h3>Limitations of BMI</h3><p>BMI cannot tell muscle from fat or show where fat is stored. Age, sex and ethnicity can also affect what is healthy.</p></div>
+      <div class="info c-blue"><span class="ic i-blue">🥗</span><h3>Tips for a healthy weight</h3><p>Eat balanced meals, stay active, sleep well, drink water and aim for gradual, sustainable changes.</p></div>
+    </div>
+  </div>
+</section>
+
+<article class="article">
+  <div class="container narrow">
+    <h2>Understanding Body Mass Index (BMI): A Complete Guide to Measuring Your Body Weight</h2>
+
+    <h3>What Is Body Mass Index?</h3>
+    <p>Body Mass Index, usually shortened to BMI, is a number calculated from a person's height and weight. It gives a quick idea of whether your weight is low, typical or high for your height. Doctors, dietitians and public health organisations use it because it is simple, free and needs no special equipment.</p>
+
+    <h3>How Does a BMI Calculator Work?</h3>
+    <p>A BMI Calculator applies the BMI formula to the measurements you enter. In metric units, your weight in kilograms is divided by your height in metres squared. In imperial units, your weight in pounds is multiplied by 703 and divided by your height in inches squared. The result is your BMI score, which is then matched to a category.</p>
+
+    <h3>Understanding Different BMI Categories</h3>
+    <p>For adults aged 20 and over, a BMI below 18.5 falls in the underweight range. A score from 18.5 to 24.9 is considered normal weight, 25.0 to 29.9 is overweight, and 30.0 or higher is classed as obesity. These BMI categories are the same for men and women, but they are not designed for children and teenagers, who need age- and sex-specific growth charts.</p>
+
+    <h3>Why Is BMI Important for Health?</h3>
+    <p>Research links very low or very high BMI values with a greater chance of health problems, including heart disease, type 2 diabetes, high blood pressure and nutritional deficiencies. Checking your BMI occasionally can be a useful early signal that it may be time to review your habits or speak to a professional.</p>
+
+    <h3>Limitations of BMI</h3>
+    <p>BMI is a screening tool, not a diagnosis. It does not measure body fat directly, so a muscular athlete may be labelled overweight while someone with little muscle may appear to be in the normal range. It also ignores where fat is stored, and it can be less accurate for older adults, pregnant women and people from different ethnic backgrounds.</p>
+
+    <h3>How to Maintain a Healthy Weight</h3>
+    <p>A healthy weight comes from steady habits rather than quick fixes. Build meals around vegetables, fruit, whole grains and lean protein. Aim for at least 150 minutes of moderate activity each week, sleep seven to nine hours, and manage stress. If your result concerns you, use it as a starting point for a conversation with a doctor.</p>
+  </div>
+</article>
+
+<section class="faq" id="faq">
+  <div class="container narrow">
+    <h2 class="title">Frequently Asked Questions</h2>
+    <p class="sub">Quick answers about BMI and this calculator.</p>
+    <div class="acc">
+      <div class="item"><button class="q" aria-expanded="false">What is a BMI Calculator?<b></b></button><div class="a"><p>A BMI Calculator is an online tool that uses your height and weight to work out your Body Mass Index and show which weight category it falls into.</p></div></div>
+      <div class="item"><button class="q" aria-expanded="false">How do I calculate my BMI?<b></b></button><div class="a"><p>Divide your weight in kilograms by your height in metres squared. Or enter your details above and the calculator does it instantly.</p></div></div>
+      <div class="item"><button class="q" aria-expanded="false">What is a healthy BMI range for adults?<b></b></button><div class="a"><p>For adults, a BMI from 18.5 to 24.9 is considered the normal or healthy weight range.</p></div></div>
+      <div class="item"><button class="q" aria-expanded="false">Is BMI accurate for everyone?<b></b></button><div class="a"><p>No. BMI is a general screening measure. It can be misleading for athletes, older adults, pregnant women and some ethnic groups because it ignores muscle mass and fat distribution.</p></div></div>
+      <div class="item"><button class="q" aria-expanded="false">Can I calculate BMI using pounds and inches?<b></b></button><div class="a"><p>Yes. Switch to Imperial and enter your weight in pounds and your height in feet and inches. The formula is weight (lbs) × 703 ÷ height (in)².</p></div></div>
+      <div class="item"><button class="q" aria-expanded="false">Does BMI differ for men and women?<b></b></button><div class="a"><p>The adult BMI formula and categories are the same for both sexes. However, women often carry more body fat than men at the same BMI, so the number should be read alongside other health measures.</p></div></div>
+      <div class="item"><button class="q" aria-expanded="false">Is BMI suitable for children and teenagers?<b></b></button><div class="a"><p>Not with adult categories. For people under 20, BMI must be compared with age- and sex-specific percentile charts, ideally with a doctor or paediatrician.</p></div></div>
+      <div class="item"><button class="q" aria-expanded="false">Can BMI determine body fat percentage?<b></b></button><div class="a"><p>No. BMI does not measure body fat. It only compares weight to height. Use our Body Fat Calculator or a clinical test for a better estimate.</p></div></div>
+      <div class="item"><button class="q" aria-expanded="false">How often should I calculate my BMI?<b></b></button><div class="a"><p>Every few months is enough for most people, or whenever your weight changes noticeably. Daily checks are not necessary.</p></div></div>
+      <div class="item"><button class="q" aria-expanded="false">Is this BMI Calculator free?<b></b></button><div class="a"><p>Yes. It is completely free, needs no sign-up, and your entries stay in your browser.</p></div></div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="footer">
+  <div class="container fgrid">
+    <div class="fbrand">
+      <a href="index.html#home" class="logo"><span>F</span>itCalc</a>
+      <p>Simple and free fitness calculators to help you understand your health and wellness.</p>
+    </div>
+    <div><h4>Quick Links</h4><ul>
+      <li><a href="index.html#home">Home</a></li><li><a href="index.html#tools">Tools</a></li><li><a href="index.html#about">About Us</a></li><li><a href="index.html#faq">FAQ</a></li></ul></div>
+    <div><h4>Our Calculators</h4><ul>
+      <li><a href="bmi.html">BMI Calculator</a></li>
+      <li><a href="tools/chlorine-calculator.html">Daily Chlorine Calculator</a></li>
+      <li><a href="tools/bmr-calculator.html">BMR Calculator</a></li>
+      <li><a href="tools/water-intake-estimator.html">Water Intake Estimator</a></li>
+      <li><a href="tools/healthy-weight-range-estimator.html">Healthy Weight Range Estimator</a></li>
+      <li><a href="tools/body-fat-calculator.html">Body Fat Calculator</a></li></ul></div>
+    <div><h4>Legal Links</h4><ul>
+      <li><a href="privacy-policy.html">Privacy Policy</a></li><li><a href="terms.html">Terms &amp; Conditions</a></li><li><a href="disclaimer.html">Disclaimer</a></li><li><a href="contact.html">Contact Us</a></li></ul></div>
+  </div>
+  <p class="copy">© 2026 FitCalc. All Rights Reserved.</p>
+</footer>
+
+<script src="script.js"></script>
+<script src="bmi.js"></script>
+</body>
+</html>
