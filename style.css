@@ -32,6 +32,9 @@ button{font-family:inherit;cursor:pointer;border:0;background:none}
 .hero h1{font-size:34px;line-height:1.35;font-weight:700;letter-spacing:-.5px;margin-bottom:22px}
 .hero p{font-size:11px;line-height:1.7;color:#333;margin-bottom:48px;max-width:290px}
 .hero-art{flex:0 0 52%}.hero-art svg{width:100%;height:auto;display:block}
+.hero-art{position:relative}
+.hero-art img{display:block;width:100%;height:auto;position:relative;z-index:2}
+.hero-art::after{content:"";position:absolute;bottom:2%;left:50%;transform:translateX(-50%);width:85%;height:28px;background:rgba(0,0,0,.25);border-radius:50%;filter:blur(14px);z-index:1}
 
 /* services */
 .services{position:relative;padding:100px 0 110px}
@@ -124,3 +127,29 @@ button{font-family:inherit;cursor:pointer;border:0;background:none}
   .d1,.d2,.r2{display:none}
 }
 @media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important;scroll-behavior:auto!important}}
+
+img { max-width: 100%; height: auto; }
+
+@media (max-width: 768px) {
+  /* Navbar: links chhupao, hamburger dikhao */
+  .nav-links { display: none; }
+  .menu-btn { display: block; }
+
+  /* Hero: upar-neeche stack */
+  .hero {
+    flex-direction: column;
+    text-align: center;
+    padding: 20px;
+  }
+  .hero h1 { font-size: 28px; }
+  .hero p { font-size: 15px; }
+  .hero img { width: 80%; margin: 0 auto; }
+
+  /* Cards: 1 column */
+  .services-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  .card { padding: 16px; }
+  .card p { font-size: 14px; }
+}
