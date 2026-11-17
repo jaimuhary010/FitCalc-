@@ -1,4 +1,5 @@
 *{box-sizing:border-box;margin:0;padding:0}
+html,body{overflow-x:clip}
 html{scroll-behavior:smooth;scroll-padding-top:20px}
 body{font-family:'Poppins',system-ui,sans-serif;color:#111;background:#fff;line-height:1.6;overflow-x:hidden}
 a{color:inherit;text-decoration:none}ul{list-style:none}
@@ -17,7 +18,8 @@ button{font-family:inherit;cursor:pointer;border:0;background:none}
 /* hero */
 .hero{position:relative;min-height:690px;padding-bottom:60px;background:linear-gradient(110deg,#bdf5e4 0%,#e9f9f3 38%,#fdeee6 100%);overflow:hidden}
 .hero::after{content:"";position:absolute;inset:0;background:#fff;clip-path:polygon(0 100%,100% 36%,100% 100%);z-index:0}
-.nav{position:relative;z-index:5;display:flex;align-items:center;justify-content:space-between;padding-top:14px;gap:20px}
+.nav{position:sticky;z-index:5;display:flex;align-items:center;justify-content:space-between;padding-top:14px;gap:20px}
+.nav{background:rgba(255,255,255,.95);backdrop-filter:blur(8px)}
 .logo{font-size:23px;font-weight:600;letter-spacing:-.3px;display:inline-block}
 .logo span{color:#2fb863}
 .links{display:flex;gap:42px;margin-left:auto;margin-right:auto;font-size:11px}
@@ -38,6 +40,7 @@ button{font-family:inherit;cursor:pointer;border:0;background:none}
 
 /* services */
 .services{position:relative;padding:100px 0 110px}
+.services,.about{overflow:hidden}
 .title{text-align:center;font-size:27px;font-weight:600}
 .sub{text-align:center;font-size:11px;color:#444;max-width:300px;margin:14px auto 74px}
 .grid{display:grid;grid-template-columns:1fr 1fr;gap:40px 14px}
