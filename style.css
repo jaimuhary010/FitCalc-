@@ -17,9 +17,10 @@ button{font-family:inherit;cursor:pointer;border:0;background:none}
 .menu-btn{display:none}
 /* hero */
 .hero{position:relative;min-height:690px;padding-bottom:60px;background:linear-gradient(110deg,#bdf5e4 0%,#e9f9f3 38%,#fdeee6 100%);overflow:hidden}
+.hero{padding-top:60px}
 .hero::after{content:"";position:absolute;inset:0;background:#fff;clip-path:polygon(0 100%,100% 36%,100% 100%);z-index:0}
-.nav{position:sticky;z-index:5;display:flex;align-items:center;justify-content:space-between;padding-top:14px;gap:20px}
-.nav{background:rgba(255,255,255,.95);backdrop-filter:blur(8px)}
+.nav{position:fixed;z-index:5;display:flex;align-items:center;justify-content:space-between;padding-top:14px;gap:20px}
+.nav{position:fixed;top:0;left:0;right:0;width:100%;margin:0;z-index:50;display:flex;align-items:center;justify-content:space-between;padding:14px max(20px,calc((100% - 1000px)/2));gap:20px}
 .logo{font-size:23px;font-weight:600;letter-spacing:-.3px;display:inline-block}
 .logo span{color:#2fb863}
 .links{display:flex;gap:42px;margin-left:auto;margin-right:auto;font-size:11px}
@@ -65,9 +66,10 @@ button{font-family:inherit;cursor:pointer;border:0;background:none}
 .dots{width:72px;height:60px;background-image:radial-gradient(#dfe2ea 2px,transparent 2px);background-size:18px 18px}
 .d1{right:0;top:150px}.d2{left:8px;bottom:50px}
 .ring{width:16px;height:16px;border:3px solid #f2c200;border-radius:50%}
-.r1{right:calc(50% - 560px);top:520px}.r2{left:48%;bottom:150px}
+.r1{left:max(0px,calc(50% - 560px));top:520px}.r2{left:48%;bottom:150px}
 .sq{left:calc(50% - 440px);top:14px;width:24px;height:24px;background:#7b6df0;box-shadow:12px 12px 0 #ffcb4d}
 .heart{left:56%;top:60px;color:#d6203f;font-size:14px}
+.hero{overflow:hidden}
 
 /* about */
 .about{position:relative;background:#f7f9ff;padding:90px 0 120px}
