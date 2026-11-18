@@ -74,7 +74,17 @@ button{font-family:inherit;cursor:pointer;border:0;background:none}
 /* about */
 .about{position:relative;background:#f7f9ff;padding:90px 0 120px}
 .about-inner{display:flex;align-items:center;gap:60px}
-.about-art{flex:0 0 36%;margin-left:3%}.about-art svg{width:100%;height:auto;display:block}
+.about-art{flex:0 0 36%;margin-left:3%}
+.about-art img{
+  width:100%;
+  max-width:320px;
+  aspect-ratio:1/1;
+  object-fit:cover;
+  border-radius:50%;
+  display:block;
+  margin:0 auto;
+  border:1px solid #e3e6f6;
+}
 .about-text h2{font-size:27px;font-weight:600;margin-bottom:20px}
 .about-text p{font-size:11px;line-height:1.85;color:#333;max-width:380px}
 
