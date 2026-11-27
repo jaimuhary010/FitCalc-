@@ -1,0 +1,30 @@
+# Fit Calculator 
+
+> Fit Calculator (fitcalculator.site) is a free online health and fitness calculator website. It offers BMI, BMR, body fat, water intake, healthy weight range and daily calorie calculators. All results are estimates for general information and educational purposes only, not medical advice.
+
+Key facts:
+- All calculators are free and need no account or sign-up.
+- Calculations run in the user's browser. Health values entered (height, weight, age, etc.) are not saved on our server.
+- Results are estimates based on general formulas and may vary from person to person.
+- Users should consult a qualified doctor, dietitian or healthcare professional before making health decisions.
+
+## Calculators
+
+- [BMI Calculator](https://fitcalculator.site/bmi-calculator.html): Estimates Body Mass Index from height and weight.
+- [BMR Calculator](https://fitcalculator.site/bmr-calculator.html): Estimates Basal Metabolic Rate, the calories the body uses at rest.
+- [Body Fat Calculator](https://fitcalculator.site/body-fat-calculator.html): Approximates body fat percentage from body measurements.
+- [Water Intake Estimator](https://fitcalculator.site/water-intake-calculator.html): Gives a general daily water intake guide.
+- [Healthy Weight Range Estimator](https://fitcalculator.site/healthy-weight-range-calculator.html): Shows a general healthy weight range for a given height.
+- [Daily Calorie Calculator](https://fitcalculator.site/calorie-calculator.html): Estimates daily calorie needs based on activity level.
+
+## Policies and Trust Pages
+
+- [About Us](https://fitcalculator.site/about-us.html): Who we are and the purpose of Fit Calculator.
+- [Contact Us](https://fitcalculator.site/contact-us.html): How to reach us for feedback, bug reports or questions.
+- [Privacy Policy](https://fitcalculator.site/privacy-policy.html): What data we collect and do not collect, cookies, Google AdSense and Analytics.
+- [Terms and Conditions](https://fitcalculator.site/terms-and-conditions.html): Rules for using the website.
+- [Disclaimer](https://fitcalculator.site/disclaimer.html): Medical disclaimer and accuracy limits of the calculators.
+
+## Optional
+
+- [Home Page](https://fitcalculator.site/): Overview of all Fit Calculator tools.
