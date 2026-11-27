@@ -7,13 +7,16 @@
 <meta name="description" content="Free ideal weight calculator to find your healthy weight range. Uses WHO BMI standards in kg/lbs and cm/ft. Check now, no signup, accurate instant results.">
 <link rel="canonical" href="https://your-domain.com/healthy-weight.html">
 <meta property="og:type" content="website">
-<meta property="og:site_name" content="FitCalc">
+<meta property="og:site_name" content="Fit Calculator">
 <meta property="og:title" content="Healthy Weight Range Calculator – Healthy Weight by Height | FitCalc">
 <meta property="og:description" content="Estimate the BMI-based healthy weight range for your height in kg and lbs. Free, simple and private.">
 <meta property="og:url" content="https://your-domain.com/healthy-weight.html">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="bmi-calculator.css">
+<link rel="stylesheet" href="bmr-calculator.css">
+<link rel="stylesheet" href="healthy-weight-calculator.css">
 </head>
 <body>
 
@@ -196,5 +199,6 @@
 </footer>
 
 <script src="script.js"></script>
+<script src="healthy-weight-calculator.js"></script>
 </body>
 </html>
