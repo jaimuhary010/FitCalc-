@@ -1,4 +1,4 @@
-# Fit Calculator 
+Fit Calculator 
 
 > Fit Calculator (fitcalculator.site) is a free online health and fitness calculator website. It offers BMI, BMR, body fat, water intake, healthy weight range and daily calorie calculators. All results are estimates for general information and educational purposes only, not medical advice.
 
